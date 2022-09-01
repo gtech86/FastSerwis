@@ -3,6 +3,7 @@ package pl.fastserwis.fastserwis.model;
 import lombok.Getter;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -16,9 +17,6 @@ public class Roles {
     @Column(name = "Role_name")
     private String roleName;
 
-    @ManyToOne
-    @JoinTable(name = "Categories",
-            joinColumns = {@JoinColumn(name = "Category_id", nullable = false)}
-    )
-    private Employees employees;
+    @OneToMany(mappedBy = "roles")
+    private Set<Employees> employees;
 }

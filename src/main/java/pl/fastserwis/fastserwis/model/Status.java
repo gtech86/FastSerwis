@@ -3,6 +3,7 @@ package pl.fastserwis.fastserwis.model;
 import lombok.Getter;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -16,9 +17,6 @@ public class Status {
     @Column(name = "Status_name")
     private String statusName;
 
-    @ManyToOne
-    @JoinTable(name = "Repair_orders",
-            joinColumns = {@JoinColumn(name = "Order_id", nullable = false)}
-    )
-    private RepairOrders repairOrders;
+    @OneToMany(mappedBy = "status")
+    private Set<RepairOrders> repairOrders;
 }

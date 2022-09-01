@@ -11,7 +11,7 @@ public class Employees {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Employee_id")
-    private Float employeeId;
+    private Long employeeId;
 
     @Column(name = "First_name")
     private String firstName;
@@ -31,16 +31,16 @@ public class Employees {
     @Column(name = "Mail")
     private String mail;
 
-    @OneToMany(mappedBy = "Employees")
-    private Set<WorkPositions> workPositions;
-
-    @OneToMany(mappedBy = "Employees")
-    private Set<Roles> roles;
+    @ManyToOne
+    @JoinColumn(name = "Position_id")
+    private WorkPositions workPositions;
 
     @ManyToOne
-    @JoinTable(name = "Repair_orders",
-            joinColumns = {@JoinColumn(name = "Order_id", nullable = false)}
-    )
-    private RepairOrders repairOrders;
+    @JoinColumn(name = "Role_id")
+    private Roles roles;
+
+    @OneToMany(mappedBy = "employees")
+    private Set<RepairOrders> repairOrders;
+
 
 }

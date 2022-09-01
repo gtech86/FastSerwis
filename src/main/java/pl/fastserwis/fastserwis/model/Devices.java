@@ -13,7 +13,7 @@ public class Devices {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Device_id")
-    private Float deviceId;
+    private Long deviceId;
 
     @Column(name = "Model")
     private String model;
@@ -24,13 +24,12 @@ public class Devices {
     @Column(name = "Description")
     private String description;
 
-    @OneToMany(mappedBy = "Devices")
-    private Set<Category> category;
-
     @ManyToOne
-    @JoinTable(name = "Repair_orders",
-            joinColumns = {@JoinColumn(name = "Order_id", nullable = false)}
-    )
-    private RepairOrders repairOrders;
+    @JoinColumn(name = "Category_id", nullable = false)
+    private Category categories;
 
+    @OneToMany(mappedBy = "devices")
+    private Set<RepairOrders> repairOrders;
+
+    public Devices(){}
 }

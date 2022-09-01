@@ -35,16 +35,19 @@ public class RepairOrders {
     @Column(name = "Parts_price")
     private BigDecimal partsPrice;
 
-    @OneToMany(mappedBy = "Repair_orders")
-    private Set<Devices> devices;
+    @ManyToOne
+    @JoinColumn(name = "Device_id")
+    private Devices devices;
 
-    @OneToMany(mappedBy = "Repair_orders")
-    private Set<Clients> clients;
+    @ManyToOne
+    @JoinColumn(name = "Client_id")
+    private Clients clients;
 
-    @OneToMany(mappedBy = "Repair_orders")
-    private Set<Employees> employees;
+    @ManyToOne
+    @JoinColumn(name = "Employee_id")
+    private Employees employees;
 
-    @OneToMany(mappedBy = "Repair_orders")
-    private Set<Status> status;
-
+    @ManyToOne
+    @JoinColumn(name = "Status_id")
+    private Status status;
 }

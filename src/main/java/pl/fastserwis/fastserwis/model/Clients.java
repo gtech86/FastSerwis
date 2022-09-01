@@ -2,6 +2,7 @@ package pl.fastserwis.fastserwis.model;
 
 import lombok.Getter;
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -10,7 +11,7 @@ public class Clients {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Client_id")
-    private Float clientId;
+    private Long clientId;
 
     @Column(name = "First_name")
     private String firstName;
@@ -36,9 +37,6 @@ public class Clients {
     @Column(name = "Mail")
     private String mail;
 
-    @ManyToOne
-    @JoinTable(name = "Repair_orders",
-            joinColumns = {@JoinColumn(name = "Order_id", nullable = false)}
-    )
-    private RepairOrders repairOrders;
+    @OneToMany(mappedBy = "clients")
+    private Set<RepairOrders> repairOrders;
 }
