@@ -32,10 +32,6 @@ public class Employees {
     private String mail;
 
     @ManyToOne
-    @JoinColumn(name = "Position_id")
-    private WorkPositions workPositions;
-
-    @ManyToOne
     @JoinColumn(name = "Role_id")
     private Roles roles;
 
