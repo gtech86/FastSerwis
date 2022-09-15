@@ -5,6 +5,7 @@ import lombok.Getter;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.sql.Date;
+import java.sql.Timestamp;
 
 @Entity
 @Getter
@@ -17,13 +18,19 @@ public class RepairOrders {
     private Long orderId;
 
     @Column(name = "Order_date")
-    private Date orderDate;
+    private Timestamp orderDate;
 
     @Column(name = "End_date")
-    private Date endDate;
+    private Timestamp endDate;
+
+    @Column(name = "Expected_end_date")
+    private Timestamp expectedEndDate;
 
     @Column(name = "Fault_description")
     private String faultDescription;
+
+    @Column(name = "Repair_description")
+    private String repairDescription;
 
     @Column(name = "Charger")
     private Boolean charger;
@@ -34,19 +41,23 @@ public class RepairOrders {
     @Column(name = "Parts_price")
     private BigDecimal partsPrice;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Device_id")
     private Devices devices;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Client_id")
     private Clients clients;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Employee_id")
     private Employees employees;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Status_id")
     private Status status;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "Order_type_id")
+    private OrderTypes orderType;
 }

@@ -31,7 +31,7 @@ public class Employees {
     @Column(name = "Mail")
     private String mail;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Role_id")
     private Roles roles;
 

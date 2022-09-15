@@ -31,6 +31,9 @@ public class Clients {
     @Column(name = "Postal_code")
     private String postalCode;
 
+    @Column(name = "City")
+    private String city;
+
     @Column(name = "Phone")
     private String phone;
 

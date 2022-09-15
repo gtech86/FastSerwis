@@ -15,16 +15,16 @@ public class Devices {
     @Column(name = "Device_id")
     private Long deviceId;
 
-    @Column(name = "Model")
-    private String model;
+    @Column(name = "Producer")
+    private String producer;
 
     @Column(name = "Serial_number")
     private String serialNumber;
 
-    @Column(name = "Description")
-    private String description;
+    @Column(name = "Model")
+    private String model;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Category_id", nullable = false)
     private Category categories;
 
