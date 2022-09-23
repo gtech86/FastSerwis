@@ -14,8 +14,8 @@ import pl.grabowski.fastserwis.service.ClientsService;
 public class ClientsController {
     private final ClientsService clientsService;
 
-    @GetMapping("{/id}")
-    public String getClientById(Model model, @PathVariable(required = true) Long clientId){
+    @GetMapping("{clientId}")
+    public String getClientById(Model model, @PathVariable(required = true) String clientId){
         model.addAttribute("client", clientsService.getClientById(clientId));
         return "searchClient";
     }

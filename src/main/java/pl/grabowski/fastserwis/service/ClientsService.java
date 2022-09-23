@@ -5,17 +5,19 @@ import org.springframework.stereotype.Service;
 import pl.grabowski.fastserwis.model.Clients;
 import pl.grabowski.fastserwis.repository.ClientsRepo;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class ClientsService {
 
     private final ClientsRepo clientsRepo;
 
-    public Clients getClientById(Long clientId){
-        return null;
+    public Clients getClientById(String clientId){
+        return clientsRepo.getClientsByPhone(clientId);
     }
 
-    public Clients getClientByLastName(String lastName){
+    public List<Clients> getClientByLastName(String lastName){
         return null;
     }
 
