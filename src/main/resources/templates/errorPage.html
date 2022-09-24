@@ -4,20 +4,20 @@
     <meta charset="UTF-8">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Wyszukaj klienta</title>
+    <title>Zlecenia</title>
     <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/main.css" rel="stylesheet">
 </head>
 <body style="background-color: rgba(0,0,255,0.1);">
 
 <div class="mh-100" >
+
     <div th:replace="menu :: navbar" ></div>
 
-    <div class="container-sm">
-        <form class="row g-sm-3">
+    <div  class="col-sm-12m">
 
-        </form>
+            <h2 class="v-h2-center text-center text-danger " th:text="${errorMessage}"></h2>
     </div>
-
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>

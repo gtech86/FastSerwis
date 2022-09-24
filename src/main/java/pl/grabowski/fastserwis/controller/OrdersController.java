@@ -16,7 +16,11 @@ public class OrdersController {
 
     @GetMapping("{orderId}")
     public String getClientById(Model model, @PathVariable(required = true) Long orderId){
-        model.addAttribute("orderDetail", ordersService.getOrderById(orderId));
-        return "searchOrderId";
+        if(ordersService.getOrderById(orderId).isPresent()){
+
+            return "searchOrderId";
+        }
+        model.addAttribute("errorMessage", "Brak zlecenia o podanym ID w systemie!! :(");
+        return "errorPage";
     }
 }

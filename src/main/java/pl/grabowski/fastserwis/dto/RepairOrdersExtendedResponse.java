@@ -22,4 +22,6 @@ public class RepairOrdersExtendedResponse {
     private final String employeePhone;
     private final String employeeMail;
     private final String statusName;
+    private final String clientFirstName;
+    private final String getClientLastName;
 }
