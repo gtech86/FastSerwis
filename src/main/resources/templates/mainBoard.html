@@ -35,7 +35,7 @@
                 <td th:text = "${order.ExpectedEndDate}"></td>
                 <td th:text = "${order.FaultDescription}"></td>
                 <td th:text = "${order.StatusName}"></td>
-                <td><a th:href="@{'/orders/'+${order.orderId}}">
+                <td><a th:href="@{'/orders/'+${order.OrderId}}">
                     <img th:src="@{/images/info.png}" style="width:32px;height:32px" />
                 </a></td>
             </tr>

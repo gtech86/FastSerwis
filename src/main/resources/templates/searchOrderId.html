@@ -13,9 +13,66 @@
 <div class="mh-100" >
     <div th:replace="menu :: navbar" ></div>
 
-    <div class="container-sm">
 
+    <div class="container-xl py-5">
+        <div class="card" style="border-radius: 10px;">
+            <div class="card-header px-4 py-3">
+                <h5 class="text-muted mb-0">Szczegóły zlecenia</h5>
+            </div>
+
+            <div class="card-body p-4">
+                <div class="row">
+
+                    <div class="col-4 px-5 py-3">
+                        <p class="fw-bolder">Status</p>
+                        <p><span th:text = "${order.StatusName}"></span></p>
+                        <p class="fw-bolder">Typ zlecenia</p>
+                        <p><span th:text = "${order.OrderType}"></span></p>
+                        <p class="fw-bolder">Serwisant</p>
+                        <P><span th:text = "${order.EmployeeFirstName} + ' ' + ${order.EmployeeLastName}"></span></P>
+                        <p class="fw-bold">Data zgłoszenia</p>
+                        <p><span th:text = "${order.OrderDate}"></span></p>
+                        <p class="fw-bold">Termin realizacji</p>
+                        <p><span th:text = "${order.ExpectedEndDate}"></span></p>
+                    </div>
+
+                <div class="col-4 px-5 py-3">
+                    <p class="fw-bolder">Klient</p>
+                    <P><span th:text = "${order.ClientFirstName} + ' ' + ${order.ClientLastName}"></span>
+                        <a th:href="@{'/clients/'+${order.ClientId}}">
+                            <img th:src="@{/images/info.png}" style="width:32px;height:32px" />
+                        </a>
+                    </P>
+                    <p>Tel: <span th:text = "${order.ClientPhone}"></span></p>
+
+                    <p class="fw-bolder">Opis usterki</p>
+                    <p><span th:text = "${order.FaultDescription}"></span></p>
+                </div>
+
+                <div class="col-4 px-5 py-3">
+                    <p class="fw-bolder">Urządzenie</p>
+                    <p><span th:text = "${order.DeviceProducer} + ' ' + ${order.DeviceModel}"></span>
+                        <a th:href="@{'/devices/'+${order.DeviceId}}">
+                            <img th:src="@{/images/info.png}" style="width:32px;height:32px" />
+                        </a>
+                    </p>
+                    <p>Numer seryjny: <span th:text = "${order.DeviceSerialNumber}"></span></p>
+
+                    <p class="fw-bolder">Opis naprawy</p>
+                    <p><span th:text = "${order.RepairDescription}"></span></p>
+                </div>
+
+                </div>
+
+                <div class="row">
+
+
+                </div>
+            </div>
+
+        </div>
     </div>
+
 
 </div>
 

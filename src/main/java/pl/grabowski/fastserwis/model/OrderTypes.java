@@ -1,7 +1,6 @@
 package pl.grabowski.fastserwis.model;
 
 import lombok.Getter;
-
 import javax.persistence.*;
 import java.util.Set;
 

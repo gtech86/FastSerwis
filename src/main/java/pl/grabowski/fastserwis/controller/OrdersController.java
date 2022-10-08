@@ -16,7 +16,9 @@ public class OrdersController {
 
     @GetMapping("{orderId}")
     public String getClientById(Model model, @PathVariable(required = true) Long orderId){
-        if(ordersService.getOrderById(orderId).isPresent()){
+        var extendedOrder = ordersService.getExtendedRepairOrders(orderId);
+        if(extendedOrder.isPresent()){
+            model.addAttribute("order", extendedOrder.get());
 
             return "searchOrderId";
         }
