@@ -41,7 +41,7 @@ public class RepairOrders {
     @Column(name = "Parts_price")
     private BigDecimal partsPrice;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "Device_id")
     private Devices devices;
 

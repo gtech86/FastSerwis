@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org" lang="pl" >
+<head>
+  <meta charset="UTF-8">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Zlecenia</title>
+  <link href="/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body style="background-color: rgba(0,0,255,0.1);">
+
+<div class="mh-100" >
+
+  <div th:replace="menu :: navbar" ></div>
+
+  <div  class="container-sm">
+    <h1 class="display-3">Zlecenia</h1>
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th>Kategoria</th>
+        <th>Serwisant</th>
+        <th>Przyjęcie</th>
+        <th>Termin</th>
+        <th>Usterka</th>
+        <th>Status</th>
+        <th> </th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="order: ${orders}">
+        <td th:text = "${order.CategoryName}"></td>
+        <td th:text = "${order.LastName}"></td>
+        <td th:text = "${order.OrderDate}"></td>
+        <td th:text = "${order.ExpectedEndDate}"></td>
+        <td th:text = "${order.FaultDescription}"></td>
+        <td th:text = "${order.StatusName}"></td>
+        <td><a th:href="@{'/orders/'+${order.OrderId}}">
+          <img th:src="@{/images/info.png}" style="width:32px;height:32px" />
+        </a></td>
+      </tr>
+      </tbody>
+    </table>
+
+    <button
+            type="button" class="btn btn-success"
+            style="--bs-btn-padding-y: .45rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .95rem;"
+    >Dodaj</button>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+<script src="/js/bootstrap.min.js"></script>
+
+</body>
+</html>

@@ -6,4 +6,5 @@ import pl.grabowski.fastserwis.model.Status;
 
 @Repository
 public interface StatusRepo extends CrudRepository<Status, Integer> {
+    Status getStatusByStatusNameIsLike(String statusName);
 }
