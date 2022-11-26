@@ -18,7 +18,6 @@ import pl.grabowski.fastserwis.service.RepairOrdersService;
 public class OrdersController {
     private final RepairOrdersService ordersService;
     private final RepairOrdersRepo ordersRepo;
-    private final StatusRepo statusRepo;
 
     @GetMapping("{orderId}")
     public String getOrderById(Model model, @PathVariable(required = true) Long orderId){
