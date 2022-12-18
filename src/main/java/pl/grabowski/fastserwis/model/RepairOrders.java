@@ -4,7 +4,6 @@ import lombok.Getter;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.sql.Date;
 import java.sql.Timestamp;
 
 @Entity
@@ -47,7 +46,7 @@ public class RepairOrders {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Client_id")
-    private Clients clients;
+    private Client clients;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Employee_id")

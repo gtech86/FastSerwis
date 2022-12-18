@@ -26,7 +26,7 @@ public class OrdersController {
             model.addAttribute("order", extendedOrder.get());
             return "searchOrderId";
         }
-        model.addAttribute("errorMessage", "Brak zlecenia o podanym ID w systemie!! :(");
+        model.addAttribute("errorMessage", "Brak zlecenia o podanym numerze w systemie!! :(");
         return "errorPage";
     }
 

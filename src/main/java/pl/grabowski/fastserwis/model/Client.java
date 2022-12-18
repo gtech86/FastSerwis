@@ -1,13 +1,15 @@
 package pl.grabowski.fastserwis.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity
 @Getter
+@AllArgsConstructor
 @Table(name = "Clients")
-public class Clients {
+public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Client_id")
@@ -42,4 +44,8 @@ public class Clients {
 
     @OneToMany(mappedBy = "clients")
     private Set<RepairOrders> repairOrders;
+
+    public Client() {
+
+    }
 }
