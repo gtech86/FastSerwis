@@ -21,45 +21,44 @@
                 <h5 class="text-muted mb-0">Nowy klient</h5>
             </div>
             <div class="card-body p-4">
-            <form class="row g-3" action="#" th:action="@{/clients/add}" method="post" th:object="${CreateClientRequest}">
+            <form class="row g-3" action="#" th:action="@{/clients/add}" method="post" th:object="${client}">
                 <div class="row">
                     <div class="col-md-4">
                         <label for="firstName" class="form-label">Imię:</label>
-                        <input type="text" class="form-control" id="firstName">
+                        <input type="text" class="form-control" id="firstName" th:field="${client.firstName}">
                     </div>
 
                     <div class="col-md-4">
                         <label for="lastName" class="form-label">Nazwisko</label>
-                        <input type="text" class="form-control" id="lastName">
+                        <input type="text" class="form-control" id="lastName" th:field="${client.lastName}">
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-4">
                         <label for="street" class="form-label">Ulica</label>
-                        <input type="text" class="form-control" id="street">
+                        <input type="text" class="form-control" id="street" th:field="${client.street}">
                     </div>
 
 
                     <div class="col-md-2">
                         <label for="streetNumber" class="form-label">Numer domu</label>
-                        <input type="number" class="form-control" id="streetNumber">
+                        <input type="number" class="form-control" id="streetNumber" th:field="${client.streetNumber}">
                     </div>
                     <div class="col-md-2">
                         <label for="flatNumber" class="form-label">Numer mieszkania</label>
-                        <input type="number" class="form-control" id="flatNumber">
+                        <input type="number" class="form-control" id="flatNumber" th:field="${client.flatNumber}">
                     </div>
-
                 </div>
 
 
                 <div class="row">
                     <div class="col-md-2">
                         <label for="postalCode" class="form-label">Kod pocztowy</label>
-                        <input type="text" class="form-control" id="postalCode">
+                        <input type="text" class="form-control" id="postalCode" th:field="${client.postalCode}">
                     </div>
                     <div class="col-md-3">
                         <label for="city" class="form-label">Miasto</label>
-                        <input type="text" class="form-control" id="city">
+                        <input type="text" class="form-control" id="city" th:field="${client.city}">
                     </div>
 
                 </div>
@@ -67,11 +66,11 @@
                 <div class="row">
                         <div class="col-md-3">
                             <label for="phone" class="form-label">Telefon</label>
-                            <input type="text" class="form-control" id="phone">
+                            <input type="text" class="form-control" id="phone" th:field="${client.phone}">
                         </div>
                         <div class="col-md-3">
                             <label for="mail" class="form-label">E-mail</label>
-                            <input type="email" class="form-control" id="mail">
+                            <input type="email" class="form-control" id="mail" th:field="${client.mail}">
                         </div>
                 </div>
 

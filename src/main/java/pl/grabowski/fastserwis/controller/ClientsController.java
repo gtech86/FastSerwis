@@ -2,6 +2,7 @@ package pl.grabowski.fastserwis.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.slf4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -37,13 +38,15 @@ public class ClientsController {
     }
     @GetMapping("/add")
     public String newClient(Model model){
+        model.addAttribute("client", new CreateClientRequest());
         return "CreateClient";
     }
 
     @PostMapping("/add")
-    public String addNewClient(@Valid @ModelAttribute("CreateClientRequest") CreateClientRequest clientParameter) {
+    public String addNewClient(@Valid @ModelAttribute CreateClientRequest clientParameter) {
         Client newClient = mapper.map(clientParameter, Client.class);
         var addedClient = clientsService.addNewClient(newClient);
+        System.out.println(clientParameter);
         return "redirect:/clients";
     }
 
