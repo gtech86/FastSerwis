@@ -13,40 +13,49 @@
 
     <div th:replace="menu :: navbar" ></div>
 
-    <div  class="container-sm">
-        <h1 class="display-3">Zlecenia</h1>
-        <table class="table table-striped">
-            <thead>
-            <tr>
-                <th>Kategoria</th>
-                <th>Serwisant</th>
-                <th>Przyjęcie</th>
-                <th>Termin</th>
-                <th>Usterka</th>
-                <th>Status</th>
-                <th> </th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="order: ${orders}">
-                <td th:text = "${order.CategoryName}"></td>
-                <td th:text = "${order.LastName}"></td>
-                <td th:text = "${order.OrderDate}"></td>
-                <td th:text = "${order.ExpectedEndDate}"></td>
-                <td th:text = "${order.FaultDescription}"></td>
-                <td th:text = "${order.StatusName}"></td>
-                <td><a th:href="@{'/orders/'+${order.OrderId}}">
-                    <img th:src="@{/images/info.png}" style="width:32px;height:32px" />
-                </a></td>
-            </tr>
-            </tbody>
-        </table>
+    <div class="container-xl py-5">
+        <div class="card" style="border-radius: 10px;">
+            <div class="card-header px-4 py-3">
+                <h5 class="text-muted mb-0">Zlecenia</h5>
+            </div>
+            <div  class="card-body p-4">
+                <div class = "row">
+                    <div class = "col-12">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th>Kategoria</th>
+                                <th>Serwisant</th>
+                                <th>Przyjęcie</th>
+                                <th>Termin</th>
+                                <th>Usterka</th>
+                                <th>Status</th>
+                                <th> </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="order: ${orders}">
+                                <td th:text = "${order.CategoryName}"></td>
+                                <td th:text = "${order.LastName}"></td>
+                                <td th:text = "${order.OrderDate}"></td>
+                                <td th:text = "${order.ExpectedEndDate}"></td>
+                                <td th:text = "${order.FaultDescription}"></td>
+                                <td th:text = "${order.StatusName}"></td>
+                                <td><a th:href="@{'/orders/'+${order.OrderId}}">
+                                    <img th:src="@{/images/info.png}" style="width:32px;height:32px" />
+                                </a></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
 
-        <button
-                type="button" class="btn btn-success"
-                style="--bs-btn-padding-y: .45rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .95rem;"
-        >Dodaj</button>
+            </div>
+
+        </div>
     </div>
+
+
 
 
 </div>

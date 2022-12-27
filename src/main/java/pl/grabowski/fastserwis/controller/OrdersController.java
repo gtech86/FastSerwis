@@ -30,6 +30,10 @@ public class OrdersController {
         return "errorPage";
     }
 
+    public String getOrderByClientId(@PathVariable(required = true) Long clientId){
+        return "";
+    }
+
     @GetMapping
     public String getOrderByStatus(Model model, @RequestParam String ordersStatus){
         var orders = ordersRepo.getRepairOrdersByStatus(ordersStatus);

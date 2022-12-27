@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org" lang="pl" >
+<html xmlns:th="http://www.thymeleaf.org" lang="pl" >
+<head>
+    <meta charset="UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Nowy klient</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <script type="text/javascript" th:src = "@{/scripts/includeHtml.js}"></script>
+</head>
+<body style="background-color: rgba(0,0,255,0.1);">
+
+<div class="mh-100" >
+    <div th:replace="menu :: navbar" ></div>
+
+
+    <div class="container-xl py-5">
+        <div class="card" style="border-radius: 10px;">
+            <div class="card-header px-4 py-3">
+                <h5 class="text-muted mb-0">Nowy klient</h5>
+            </div>
+            <div class="card-body p-4">
+
+            <form class="row g-3" action="#" th:action="@{/clients/add}" method="post" th:object="${client}">
+                <div class="row">
+                    <div class="col-md-4">
+                        <label for="firstName" class="form-label">Imię:</label>
+                        <input type="text" class="form-control" id="firstName" th:field="${client.firstName}">
+                    </div>
+
+                    <div class="col-md-4">
+                        <label for="lastName" class="form-label">Nazwisko</label>
+                        <input type="text" class="form-control" id="lastName" th:field="${client.lastName}">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <label for="street" class="form-label">Ulica</label>
+                        <input type="text" class="form-control" id="street" th:field="${client.street}">
+                    </div>
+
+
+                    <div class="col-md-2">
+                        <label for="streetNumber" class="form-label">Numer domu</label>
+                        <input type="number" class="form-control" id="streetNumber" th:field="${client.streetNumber}">
+                    </div>
+                    <div class="col-md-2">
+                        <label for="flatNumber" class="form-label">Numer mieszkania</label>
+                        <input type="number" class="form-control" id="flatNumber" th:field="${client.flatNumber}">
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-md-2">
+                        <label for="postalCode" class="form-label">Kod pocztowy</label>
+                        <input type="text" class="form-control" id="postalCode" th:field="${client.postalCode}">
+                    </div>
+                    <div class="col-md-3">
+                        <label for="city" class="form-label">Miasto</label>
+                        <input type="text" class="form-control" id="city" th:field="${client.city}">
+                    </div>
+
+                </div>
+
+                <div class="row">
+                        <div class="col-md-3">
+                            <label for="phone" class="form-label">Telefon</label>
+                            <input type="text" class="form-control" id="phone" th:field="${client.phone}">
+                        </div>
+                        <div class="col-md-3">
+                            <label for="mail" class="form-label">E-mail</label>
+                            <input type="email" class="form-control" id="mail" th:field="${client.mail}">
+                        </div>
+                </div>
+
+
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary">Dodaj</button>
+                </div>
+            </form>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js" integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous"></script>
+
+</body>
+</html>

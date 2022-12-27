@@ -1,6 +1,9 @@
 package pl.grabowski.fastserwis.dto;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
@@ -10,12 +13,10 @@ import javax.validation.constraints.Size;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class CreateClientRequest {
+public class UpdateClientRequest {
     @NotNull
-    @Size(min=2, max=25)
     private String firstName;
     @NotNull
-    @Size(min=2, max=35)
     private String lastName;
     @NotNull
     @Size(min=2, max=40)
