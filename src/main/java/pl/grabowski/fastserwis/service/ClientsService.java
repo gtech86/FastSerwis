@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import pl.grabowski.fastserwis.dto.UpdateClientRequest;
@@ -13,7 +12,6 @@ import pl.grabowski.fastserwis.repository.ClientRepo;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -53,7 +51,7 @@ public class ClientsService {
     }
 
     public List<Client> getClientBy(String firstName, String lastName, String mail, String phone) {
-        return clientRepo.getClientsByFirstNameOrLastNameOrMailOrPhone(firstName, lastName, mail, phone);
+        return clientRepo.getClientsByFirstNameAndLastNameAndMailAndPhone(firstName, lastName, mail, phone);
     }
 
     public Page<Client> getClients(int page, String sort) {

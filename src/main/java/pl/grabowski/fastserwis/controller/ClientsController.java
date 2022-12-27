@@ -14,6 +14,7 @@ import pl.grabowski.fastserwis.service.ClientsService;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Controller
@@ -55,12 +56,12 @@ public class ClientsController {
     @GetMapping("/find")
     public String getClientByPersonalData(
             Model model,
-            @RequestParam(required = false)  String firstName,
+            @RequestParam(required = false) Optional<String> firstName,
             @RequestParam(required = false)  String lastName,
             @RequestParam(required = false)  String mail,
             @RequestParam(required = false)  String phone)
     {
-        model.addAttribute("clients", clientsService.getClientBy(firstName, lastName, mail, phone));
+        model.addAttribute("clients", clientsService.getClientBy(firstName.orElse(""), lastName, mail, phone));
         return "/client/clients";
     }
     @GetMapping("/add")
@@ -95,7 +96,7 @@ public class ClientsController {
     @PostMapping("/edit/{clientId}")
     public String editClient(@Valid UpdateClientRequest updateClientRequest, @PathVariable Long clientId) {
         clientsService.updateClient(clientId, updateClientRequest);
-        return "redirect:/clients/";
+        return "redirect:/clients/"+clientId;
     }
 
 }
