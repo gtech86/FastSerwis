@@ -1,13 +1,17 @@
 package pl.grabowski.fastserwis.model;
 
-import lombok.Getter;
+import lombok.*;
+
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity
 @Getter
+@Setter
+@Builder
+@AllArgsConstructor
 @Table(name = "Employees")
-public class Employees {
+public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Employee_id")
@@ -38,5 +42,6 @@ public class Employees {
     @OneToMany(mappedBy = "employees")
     private Set<RepairOrders> repairOrders;
 
-
+    public Employee() {
+    }
 }

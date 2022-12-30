@@ -2,6 +2,7 @@ package pl.grabowski.fastserwis.service;
 
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,7 +19,8 @@ public class ClientsService {
 
     private final ClientRepo clientRepo;
     private final ModelMapper modelMapper;
-    private static final int pageSize = 10;
+    @Value("${page.size}")
+    private int pageSize;
 
     private static final ExampleMatcher SEARCH_CONDITIONS_MATCH_ALL = ExampleMatcher
             .matching()
