@@ -11,12 +11,12 @@ import pl.grabowski.fastserwis.service.EmployeeService;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/")
+@RequestMapping("/employees")
 public class EmployeesController {
 
     private final EmployeeService employeeService;
 
-    @GetMapping("employees")
+    @GetMapping
     String getAll(Model model){
         model.addAttribute("allEmployees", employeeService.getAllEmployees());
         return "employees";

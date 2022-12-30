@@ -9,67 +9,39 @@
 
 </head>
     <body style="background-color: rgba(0,0,255,0.1);">
-    <div class="mh-100" >
+        <div th:replace="menu :: navbar" ></div>
+            <div class="container-xl py-5">
+                <div class="card" style="border-radius: 10px;">
+                    <div class="card-header px-4 py-3">
+                        <h5 class="text-muted mb-0">Lista pracowników</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Imię:</th>
+                                        <th>Nazwisko:</th>
+                                        <th>Telefon:</th>
+                                        <th>E-mail</th>
+                                    </tr>
+                                </thead>
+                                    <tbody>
+                                    <tr th:each="employee: ${allEmployees}">
+                                        <td th:text = "${employee.firstName}"></td>
+                                        <td th:text = "${employee.lastName}"></td>
+                                        <td th:text = "${employee.Phone}"></td>
+                                        <td th:text = "${employee.Mail}"></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
 
-        <nav class="navbar navbar-expand-lg bg-light">
-            <div class="container-sm">
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="/"></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Link</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Dropdown
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Action</a></li>
-                                <li><a class="dropdown-item" href="#">Another action</a></li>
-                                <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="#">Something else here</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                    <form class="d-flex" role="search">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-success" type="submit">Search</button>
-                    </form>
                 </div>
             </div>
-        </nav>
 
-            <div  class="container-sm">
-                <h1 class="display-3">Pracownicy</h1>
-                <table class="table table-striped">
-                    <thead>
-                    <tr>
-                        <th>Imię:</th>
-                        <th>Nazwisko:</th>
-                        <th>Telefon:</th>
-                        <th>E-mail</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="employee: ${allEmployees}">
-                        <td th:text = "${employee.firstName}"></td>
-                        <td th:text = "${employee.lastName}"></td>
-                        <td th:text = "${employee.Phone}"></td>
-                        <td th:text = "${employee.Mail}"></td>
-                    </tr>
-                    </tbody>
-                </table>
-
-                <button
-                        type="button" class="btn btn-success"
-                        style="--bs-btn-padding-y: .45rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .95rem;"
-                >Dodaj</button>
-    </div>
-    </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
-    <script src="/js/bootstrap.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+        <script src="/js/bootstrap.min.js"></script>
     </body>
 </html>
