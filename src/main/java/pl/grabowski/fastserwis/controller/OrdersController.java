@@ -7,9 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import pl.grabowski.fastserwis.model.RepairOrders;
 import pl.grabowski.fastserwis.repository.RepairOrdersRepo;
-import pl.grabowski.fastserwis.repository.StatusRepo;
 import pl.grabowski.fastserwis.service.RepairOrdersService;
 
 @Controller
@@ -24,7 +22,7 @@ public class OrdersController {
         var extendedOrder = ordersService.getExtendedRepairOrders(orderId);
         if(extendedOrder.isPresent()){
             model.addAttribute("order", extendedOrder.get());
-            return "searchOrderId";
+            return "/order/searchOrderId";
         }
         model.addAttribute("errorMessage", "Brak zlecenia o podanym numerze w systemie!! :(");
         return "errorPage";
@@ -38,7 +36,7 @@ public class OrdersController {
     public String getOrderByStatus(Model model, @RequestParam String ordersStatus){
         var orders = ordersRepo.getRepairOrdersByStatus(ordersStatus);
         model.addAttribute("orders", orders);
-        return "searchOrder";
+        return "/order/searchOrder";
 
     }
 }

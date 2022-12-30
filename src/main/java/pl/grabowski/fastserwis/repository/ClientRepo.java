@@ -1,5 +1,6 @@
 package pl.grabowski.fastserwis.repository;
 
+import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.PagingAndSortingRepository;
@@ -12,6 +13,7 @@ import java.util.Optional;
 @Repository
 public interface ClientRepo extends PagingAndSortingRepository<Client, Float> {
     Page<Client> findAll(Pageable pageable);
+    Page<Client> findAll(Example<Client> example, Pageable pageable);
     Client getClientsByPhone(String phone);
     Optional<Client> getClientByClientId(Long clientId);
     Client getClientsByMail(String mail);

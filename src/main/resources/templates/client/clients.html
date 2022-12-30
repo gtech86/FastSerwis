@@ -19,6 +19,38 @@
             </div>
 
             <div  class="card-body">
+                <div class = "row">
+                    <form class="row g-3" action="#" th:action="@{/clients/find}">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label for="firstName" class="form-label">Imię:</label>
+                                <input type="text" class="form-control" id="firstName" th:name="firstName">
+                            </div>
+
+                            <div class="col-md-4">
+                                <label for="lastName" class="form-label">Nazwisko</label>
+                                <input type="text" class="form-control" id="lastName" th:name="lastName">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label for="phone" class="form-label">Telefon</label>
+                                <input type="text" class="form-control" id="phone" th:name="phone">
+                            </div>
+                            <div class="col-md-3">
+                                <label for="mail" class="form-label">E-mail</label>
+                                <input type="email" class="form-control" id="mail" th:name="mail">
+                            </div>
+                        </div>
+
+
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary">Szukaj</button>
+                        </div>
+                    </form>
+                </div>
+                <div class = "row">
                     <table class="table">
                         <thead>
                         <tr>
@@ -42,19 +74,23 @@
                         </tr>
                         </tbody>
                     </table>
+                </div>
+                <div class ="row">
+                    <div th:if = "${totalPages > 1}">
+                        <div  class="container-sm align-content-sm-center">
+            <span th:each="i: ${#numbers.sequence(1, totalPages)}">
+                            <a th:if="${currentPage != i}" th:href="@{'/clients?page=' + ${i}}">[[${i}]]</a>
+                            <span th:unless="${currentPage != i}">[[${i}]]</span>  &nbsp; &nbsp;
+                        </span>
+                        </div>
+                    </div>
+                </div>
 
             </div>
         </div>
     </div>
 
-    <div th:if = "${totalPages > 1}">
-        <div  class="container-sm align-content-sm-center">
-            <span th:each="i: ${#numbers.sequence(1, totalPages)}">
-                            <a th:if="${currentPage != i}" th:href="@{'/clients?page=' + ${i}}">[[${i}]]</a>
-                            <span th:unless="${currentPage != i}">[[${i}]]</span>  &nbsp; &nbsp;
-                        </span>
-        </div>
-    </div>
+
 
 
 </div>

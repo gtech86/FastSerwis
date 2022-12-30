@@ -14,7 +14,6 @@ import pl.grabowski.fastserwis.service.ClientsService;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Controller
@@ -24,26 +23,9 @@ public class ClientsController {
     private final ClientsService clientsService;
     private final ModelMapper mapper;
 
-    @GetMapping
-    public String getClients(
-            Model model,
-            @RequestParam(required = true) int page,
-            @RequestParam(defaultValue = "clientId") String sorting
-    ){
-        Page<Client> pageClients = clientsService.getClients(page, sorting);
-        List<Client> clients = pageClients
-                .stream()
-                .collect(Collectors.toList());
-        model.addAttribute("clients", clients);
-        model.addAttribute("totalPages", pageClients.getTotalPages());
-        model.addAttribute("currentPage", page);
-        return "/client/clients";
-    }
-
     @GetMapping("/{clientId}")
     public String getClientById(Model model,
-                                @PathVariable(required = true) Long clientId,
-                                @RequestParam(required = false) Long newClientId){
+                                @PathVariable Long clientId) {
         var client = clientsService.getClientById(clientId);
         if(client.isPresent()){
             model.addAttribute("client", client.get());
@@ -56,12 +38,21 @@ public class ClientsController {
     @GetMapping("/find")
     public String getClientByPersonalData(
             Model model,
-            @RequestParam(required = false) Optional<String> firstName,
-            @RequestParam(required = false)  String lastName,
-            @RequestParam(required = false)  String mail,
-            @RequestParam(required = false)  String phone)
+            @RequestParam(required = false) String firstName,
+            @RequestParam(required = false)  String  lastName,
+            @RequestParam(required = false)  String  mail,
+            @RequestParam(required = false)  String  phone,
+            @RequestParam(defaultValue = "1") int page,
+            @RequestParam(defaultValue = "clientId") String sorting)
     {
-        model.addAttribute("clients", clientsService.getClientBy(firstName.orElse(""), lastName, mail, phone));
+        Page<Client> pageClients = clientsService.searchClient(firstName, lastName, mail, phone,page, sorting);
+        List<Client> clients = pageClients
+                .stream()
+                .collect(Collectors.toList());
+        model.addAttribute("clients", clients);
+        model.addAttribute("totalPages", pageClients.getTotalPages());
+        model.addAttribute("currentPage", page);
+        model.addAttribute("clients", clients);
         return "/client/clients";
     }
     @GetMapping("/add")
@@ -71,10 +62,9 @@ public class ClientsController {
     }
 
     @PostMapping("/add")
-    public String addNewClient(@Valid CreateClientRequest clientParameter, RedirectAttributes attributes, Model model) {
+    public String addNewClient(@Valid CreateClientRequest clientParameter, RedirectAttributes attributes) {
         Client newClient = mapper.map(clientParameter, Client.class);
         var addedClient = clientsService.addNewClient(newClient);
-        //model.addAttribute("client", addedClient);
         attributes.addFlashAttribute("newUser", addedClient);
         return "redirect:/clients/"+addedClient.getClientId();
     }

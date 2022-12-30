@@ -2,10 +2,9 @@ package pl.grabowski.fastserwis.service;
 
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import pl.grabowski.fastserwis.dto.UpdateClientRequest;
 import pl.grabowski.fastserwis.model.Client;
 import pl.grabowski.fastserwis.repository.ClientRepo;
@@ -20,6 +19,14 @@ public class ClientsService {
     private final ClientRepo clientRepo;
     private final ModelMapper modelMapper;
     private static final int pageSize = 10;
+
+    private static final ExampleMatcher SEARCH_CONDITIONS_MATCH_ALL = ExampleMatcher
+            .matching()
+            .withMatcher("firstName", ExampleMatcher.GenericPropertyMatchers.contains().ignoreCase())
+            .withMatcher("lastName", ExampleMatcher.GenericPropertyMatchers.contains().ignoreCase())
+            .withMatcher("mail", ExampleMatcher.GenericPropertyMatchers.contains().ignoreCase())
+            .withMatcher("phone", ExampleMatcher.GenericPropertyMatchers.contains().ignoreCase())
+            .withIgnorePaths("clientId", "streetNumber", "flatNumber", "street", "postalCode", "city");
 
     public Optional<Client> getClientById(Long clientId){
         return clientRepo.getClientByClientId(clientId);
@@ -49,9 +56,20 @@ public class ClientsService {
         else return Optional.empty();
 
     }
+    @Transactional
+    public Page<Client> searchClient(String firstName, String lastName, String mail, String phone, int page, String sort) {
+        Client client = Client.builder()
+                .firstName(firstName)
+                .lastName(lastName)
+                .mail(mail)
+                .phone(phone)
+                .build();
 
-    public List<Client> getClientBy(String firstName, String lastName, String mail, String phone) {
-        return clientRepo.getClientsByFirstNameAndLastNameAndMailAndPhone(firstName, lastName, mail, phone);
+        Example<Client> example = Example.of(client, SEARCH_CONDITIONS_MATCH_ALL);
+
+        Page<Client> clients = clientRepo.findAll(example, PageRequest.of(page-1, pageSize, Sort.by(sort)));
+
+        return clients;
     }
 
     public Page<Client> getClients(int page, String sort) {
