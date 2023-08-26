@@ -52,7 +52,6 @@ public class ClientsController {
         model.addAttribute("clients", clients);
         model.addAttribute("totalPages", pageClients.getTotalPages());
         model.addAttribute("currentPage", page);
-        model.addAttribute("clients", clients);
         return "/client/clients";
     }
     @GetMapping("/add")

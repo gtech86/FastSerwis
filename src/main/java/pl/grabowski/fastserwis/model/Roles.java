@@ -18,5 +18,5 @@ public class Roles {
     private String roleName;
 
     @OneToMany(mappedBy = "roles")
-    private Set<Employees> employees;
+    private Set<Employee> employees;
 }

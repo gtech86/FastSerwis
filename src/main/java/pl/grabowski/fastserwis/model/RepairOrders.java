@@ -50,7 +50,7 @@ public class RepairOrders {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Employee_id")
-    private Employees employees;
+    private Employee employees;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Status_id")
