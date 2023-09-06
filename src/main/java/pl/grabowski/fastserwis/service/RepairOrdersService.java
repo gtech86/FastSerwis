@@ -3,9 +3,10 @@ package pl.grabowski.fastserwis.service;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.grabowski.fastserwis.dto.RepairOrderExtendedResponse;
-import pl.grabowski.fastserwis.dto.RepairOrdersSimpleResponse;
+import pl.grabowski.fastserwis.dto.RepairOrdersSimpleDto;
 import pl.grabowski.fastserwis.model.RepairOrders;
 import pl.grabowski.fastserwis.repository.RepairOrdersRepo;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -14,7 +15,7 @@ import java.util.Optional;
 public class RepairOrdersService {
     private final RepairOrdersRepo ordersRepo;
 
-    public List<RepairOrdersSimpleResponse> getSimpleRepairOrders() {
+    public List<RepairOrdersSimpleDto> getSimpleRepairOrders() {
         return ordersRepo.getSimpleRepairOrders();
     }
 

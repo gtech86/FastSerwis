@@ -46,8 +46,8 @@ public class Client {
     @Column(name = "Mail")
     private String mail;
 
-    @OneToMany(mappedBy = "clients")
-    private Set<RepairOrders> repairOrders;
+    @OneToMany(mappedBy = "client")
+    private Set<Devices> devices;
 
     public Client() {
 

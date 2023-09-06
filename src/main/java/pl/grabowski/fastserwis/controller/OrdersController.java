@@ -32,11 +32,10 @@ public class OrdersController {
         return "";
     }
 
-    @GetMapping
-    public String getOrderByStatus(Model model, @RequestParam String ordersStatus){
+    @GetMapping("/search")
+    public String getOrderByStatus(Model model, @RequestParam(required = false) String ordersStatus){
         var orders = ordersRepo.getRepairOrdersByStatus(ordersStatus);
         model.addAttribute("orders", orders);
         return "/order/searchOrder";
-
     }
 }

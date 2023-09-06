@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org" lang="pl" >
+<html xmlns:th="http://www.thymeleaf.org" lang="pl" >
+<head>
+    <meta charset="UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Nowe urządzanie</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <script type="text/javascript" th:src = "@{/scripts/includeHtml.js}"></script>
+</head>
+<body style="background-color: rgba(0,0,255,0.1);">
+
+<div class="mh-100" >
+    <div th:replace="menu :: navbar" ></div>
+
+
+    <div class="container-xl py-5">
+        <div class="card" style="border-radius: 10px;">
+            <div class="card-header px-4 py-3">
+                <h5 class="text-muted mb-0">Nowe urządzenie</h5>
+            </div>
+            <div class="card-body p-4">
+
+            <form class="row g-3" action="#" th:action="@{/device/add(clientId=${clientId})}" method="post" th:object="${deviceDTO}">
+                <div class="row">
+                    <div class="col-md-4">
+                        <label for="producer" class="form-label">Producent:</label>
+                        <input type="text" class="form-control" id="producer" th:field="${deviceDTO.producer}">
+                    </div>
+
+                    <div class="col-md-4">
+                        <label for="model" class="form-label">Model:</label>
+                        <input type="text" class="form-control" id="model" th:field="${deviceDTO.model}">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <label for="serialNumber" class="form-label">Numer seryjny:</label>
+                        <input type="text" class="form-control" id="serialNumber" th:field="${deviceDTO.serialNumber}">
+                    </div>
+
+                    <div class="col-md-4">
+                        <label for="category" class="form-label">Kategoria:</label>
+                        <select class="form-control" id="category" th:field="${deviceDTO.category}">
+                            <option th:each="category : ${categories}" th:value="${category.categoryId}" th:text="${category.categoryName}"></option>
+                        </select>
+                    </div>
+
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary">Dodaj</button>
+                </div>
+            </form>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js" integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous"></script>
+
+</body>
+</html>

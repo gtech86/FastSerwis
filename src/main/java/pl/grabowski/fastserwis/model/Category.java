@@ -3,6 +3,7 @@ package pl.grabowski.fastserwis.model;
 import lombok.Getter;
 import lombok.Setter;
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -13,15 +14,15 @@ public class Category {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Column(name = "Category_id")
-    private Integer categoryId;
+    private Long categoryId;
 
     @Column(name = "Category_name")
     private String categoryName;
 
-    @OneToMany(mappedBy = "categories")
-    private Set<Devices> devices;
+    @OneToMany(mappedBy = "category", fetch = FetchType.LAZY)
+    private List<Devices> devices;
 
-    public Category() {
+    public void removeDevice(Devices devices){
+        this.devices.remove(devices);
     }
-
 }

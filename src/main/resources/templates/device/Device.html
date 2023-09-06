@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org" lang="pl" >
+<head>
+    <meta charset="UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Karta urządzenia</title>
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body style="background-color: rgba(0,0,255,0.1);">
+
+<div class="mh-100" >
+    <div th:replace="menu :: navbar" ></div>
+
+    <div class="container-xl py-5">
+        <div class="card" style="border-radius: 10px;">
+            <div class="card-header px-4 py-3">
+                <h5 class="text-muted mb-0">Karta urządzenia</h5>
+            </div>
+
+            <div class="card-body p-4">
+                <span class="badge text-bg-primary">Dane urządzenia</span>
+                <div class = "row">
+                    <div class="col-4 px-5 py-3">
+                        <p>Producent:</p>
+                        <p class="fw-bolder"><span th:text = "${device.producer}"></span></p>
+
+                        <p>Model:</p>
+                        <p class="fw-bolder"><span th:text = "${device.model}"></span></p>
+                    </div>
+
+                    <div class="col-4 px-5 py-3">
+                        <p>Numer seryjny:</p>
+                        <p class="fw-bolder"><span th:text = "${device.serialNumber}"></span></p>
+
+                        <p>Kategoria: </p>
+                        <p class="fw-bolder"><span th:text = "${device.category.categoryName}"></span></p>
+                    </div>
+
+                    <div class=" row">
+                        <div class=" col-2 d-grid gap-2">
+                            <a class="btn btn-primary" th:href="@{/orders/add/{clientId}/{deviceId}(clientId=${client.clientId},deviceId=${device.deviceId})}" role="button">Dodaj zlecenie</a>
+                        </div>
+                        <div class=" col-2 d-grid gap-2">
+                            <a class="btn btn-primary" th:href="@{/device/edit(deviceId=${device.deviceId})}" role="button">Edytuj</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                <div class="card-body p-4">
+                    <span class="badge text-bg-primary">Dane klienta</span>
+                    <div class = "row">
+                        <div class="col-4 px-5 py-3">
+                            <p>Imie i nazwisko</p>
+                            <p class="fw-bolder"><span th:text = "${client.firstName} + ' ' + ${client.lastName}"></span></p>
+
+                            <p>Telefon</p>
+                            <p class="fw-bolder"><span th:text = "${client.phone}"></span></p>
+                        </div>
+
+                        <div class="col-4 px-5 py-3">
+                            <p>Adres</p>
+                            <p class="fw-bolder"><span th:text = "${client.Street}+' '+ ${client.StreetNumber}+'/'+${client.FlatNumber}"></span></p>
+
+                            <p>Kod poczt.</p>
+                            <p class="fw-bolder"><span th:text = "${client.postalCode}"></span></p>
+                        </div>
+                    </div>
+                </div>
+
+
+        </div>
+    </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+<script src="/js/bootstrap.min.js"></script>
+
+</body>
+</html>

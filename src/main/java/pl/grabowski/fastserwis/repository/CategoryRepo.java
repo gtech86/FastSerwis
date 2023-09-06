@@ -5,5 +5,5 @@ import org.springframework.stereotype.Repository;
 import pl.grabowski.fastserwis.model.Category;
 
 @Repository
-public interface CategoryRepo extends CrudRepository<Category, Integer> {
+public interface CategoryRepo extends AbstractRepository<Category> {
 }
