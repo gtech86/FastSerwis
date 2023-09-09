@@ -1,4 +1,4 @@
-package pl.grabowski.fastserwis.dto;
+package pl.grabowski.fastserwis.dto.client;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

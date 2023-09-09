@@ -79,6 +79,9 @@
                 <div class="col-12">
                     <button type="submit" class="btn btn-primary">Zapisz</button>
                 </div>
+                <div class=" col-md-2 d-grid">
+                    <a class="btn btn-primary" th:href="@{/clients/{Id}(Id=${client.clientId})}" role="button">Anuluj</a>
+                </div>
             </form>
             </div>
         </div>

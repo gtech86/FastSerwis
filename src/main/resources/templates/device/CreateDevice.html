@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Nowe urządzanie</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
-    <script type="text/javascript" th:src = "@{/scripts/includeHtml.js}"></script>
+    <script type="text/javascript" src="http://localhost:8080/scripts/includeHtml.js"></script>
 </head>
 <body style="background-color: rgba(0,0,255,0.1);">
 
@@ -20,30 +20,30 @@
             <div class="card-header px-4 py-3">
                 <h5 class="text-muted mb-0">Nowe urządzenie</h5>
             </div>
-            <div class="card-body p-4">
 
+            <div class="card-body p-4">
             <form class="row g-3" action="#" th:action="@{/device/add(clientId=${clientId})}" method="post" th:object="${deviceDTO}">
                 <div class="row">
                     <div class="col-md-4">
                         <label for="producer" class="form-label">Producent:</label>
-                        <input type="text" class="form-control" id="producer" th:field="${deviceDTO.producer}">
+                        <input type="text" class="form-control" id="producer" th:field="${deviceDTO.producer}" required>
                     </div>
 
                     <div class="col-md-4">
                         <label for="model" class="form-label">Model:</label>
-                        <input type="text" class="form-control" id="model" th:field="${deviceDTO.model}">
+                        <input type="text" class="form-control" id="model" th:field="${deviceDTO.model}" required>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-4">
                         <label for="serialNumber" class="form-label">Numer seryjny:</label>
-                        <input type="text" class="form-control" id="serialNumber" th:field="${deviceDTO.serialNumber}">
+                        <input type="text" class="form-control" id="serialNumber" th:field="${deviceDTO.serialNumber}" required>
                     </div>
 
                     <div class="col-md-4">
                         <label for="category" class="form-label">Kategoria:</label>
                         <select class="form-control" id="category" th:field="${deviceDTO.category}">
-                            <option th:each="category : ${categories}" th:value="${category.categoryId}" th:text="${category.categoryName}"></option>
+                            <option th:each="category : ${categories}" th:value="${category.categoryId}" th:text="${category.categoryName}" required></option>
                         </select>
                     </div>
 

@@ -5,10 +5,12 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import pl.grabowski.fastserwis.dto.DeviceCreateRequestDTO;
-import pl.grabowski.fastserwis.dto.DeviceDTO;
+import pl.grabowski.fastserwis.dto.client.DeviceCreateRequestDTO;
+import pl.grabowski.fastserwis.dto.device.DeviceDTO;
+import pl.grabowski.fastserwis.dto.device.DeviceSearchRequestDTO;
+import pl.grabowski.fastserwis.dto.device.DeviceUpdateDTO;
+import pl.grabowski.fastserwis.model.Devices;
 import pl.grabowski.fastserwis.repository.CategoryRepo;
-import pl.grabowski.fastserwis.repository.ClientRepo;
 import pl.grabowski.fastserwis.service.ClientsService;
 import pl.grabowski.fastserwis.service.DeviceService;
 import pl.grabowski.fastserwis.service.mapper.CategoryMapper;
@@ -44,17 +46,17 @@ public class DevicesController {
     }
 
     @GetMapping("/edit")
-    public String editClient(
+    public String editDevice(
             @RequestParam Long deviceId,
             Model model){
-        model.addAttribute("deviceDTO", deviceService.getDeviceById(deviceId));
+        model.addAttribute("deviceDTO", deviceService.getDeviceToUpdateById(deviceId));
         model.addAttribute("categories", categoryMapper.toDto(categoryRepo.findAll()));
         return "/device/UpdateDevice";
 
     }
 
     @PostMapping("/edit")
-    public String updateDevice(@Valid DeviceCreateRequestDTO updateDeviceDTO,  @RequestParam String deviceId) {
+    public String updateDevice(@Valid DeviceUpdateDTO updateDeviceDTO, @RequestParam String deviceId) {
         deviceService.updateDevice(updateDeviceDTO);
         return "redirect:/device/"+deviceId;
     }
@@ -72,13 +74,20 @@ public class DevicesController {
     @GetMapping("/find")
     public String getClientByPersonalData(
             Model model,
-            @RequestParam(defaultValue = "1") int page)
+            @RequestParam(required = false) String producer,
+            @RequestParam(required = false)  String  deviceModel,
+            @RequestParam(required = false)  String  serialNumber,
+            @RequestParam(required = false)  Long categoryId,
+            @RequestParam(defaultValue = "1") int page,
+            @RequestParam(defaultValue = "deviceId") String sorting)
     {
-        Page<DeviceDTO> allDevices = deviceService.getAllDevices(page);
+        DeviceSearchRequestDTO deviceSearchRequestDTO = new DeviceSearchRequestDTO(producer, serialNumber, deviceModel, categoryId);
+        Page<Devices> allDevices = deviceService.searchDevice(deviceSearchRequestDTO, page, sorting);
         List<DeviceDTO> devices = allDevices
-                .stream()
+                .stream().map(deviceMapper::toDto)
                 .collect(Collectors.toList());
         model.addAttribute("devices", devices);
+        model.addAttribute("categories", categoryMapper.toDto(categoryRepo.findAll()));
         model.addAttribute("totalPages", allDevices.getTotalPages());
         model.addAttribute("currentPage", page);
         return "/device/SearchDevice";

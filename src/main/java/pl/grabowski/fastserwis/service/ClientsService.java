@@ -6,18 +6,22 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import pl.grabowski.fastserwis.dto.UpdateClientRequest;
+import pl.grabowski.fastserwis.dto.client.ClientDTO;
+import pl.grabowski.fastserwis.dto.client.UpdateClientRequest;
 import pl.grabowski.fastserwis.model.Client;
 import pl.grabowski.fastserwis.repository.ClientRepo;
+import pl.grabowski.fastserwis.service.mapper.ClientMapper;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class ClientsService {
 
     private final ClientRepo clientRepo;
+    private final ClientMapper clientMapper;
     private final ModelMapper modelMapper;
     @Value("${page.size}")
     private int pageSize;
@@ -34,6 +38,13 @@ public class ClientsService {
         return clientRepo.getClientByClientId(clientId);
     }
 
+    public ClientDTO getClientByDeviceId(Long deviceId){
+        return clientMapper.toDto(clientRepo.findClientByDeviceId(deviceId));
+    }
+    public ClientDTO getClientDtoById(Long clientId){
+        Optional<Client> client = clientRepo.getClientByClientId(clientId);
+        return clientMapper.toDto(client.orElseThrow());
+    }
     public List<Client> getClientByLastName(String lastName){
         return null;
     }

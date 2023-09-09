@@ -46,16 +46,31 @@
                         <div class=" col-2 d-grid gap-2">
                             <a class="btn btn-primary" th:href="@{/device/add/{clientId}(clientId=${clientId})}" role="button">Dodaj urządzenie</a>
                         </div>
-
-                        <div class=" col-2 d-grid gap-2">
-                            <a class="btn btn-primary" th:href="@{'/orders?clientId='+${client.clientId}}" role="button">Wyszukaj naprawy</a>
-                        </div>
-
                         <div class=" col-2 d-grid gap-2">
                             <a class="btn btn-primary" th:href="@{'/clients/edit/'+${client.clientId}}" role="button">Edytuj</a>
                         </div>
+                    </div>
 
-
+                    <div class = "row container">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th scope="col">Producent</th>
+                                <th scope="col">Model</th>
+                                <th scope="col">Numer seryjny</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr scope="row" th:each="device: ${devices}">
+                                <td th:text = "${device.Producer}"></td>
+                                <td th:text = "${device.Model}"></td>
+                                <td th:text = "${device.SerialNumber}"></td>
+                                <td><a th:href="@{'/device/'+${device.DeviceId}}">
+                                    <img th:src="@{/images/info.png}" style="width:32px;height:32px" />
+                                </a></td>
+                            </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>

@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -47,7 +48,7 @@ public class Client {
     private String mail;
 
     @OneToMany(mappedBy = "client")
-    private Set<Devices> devices;
+    private Set<Devices> devices = new HashSet<>();
 
     public Client() {
 

@@ -2,7 +2,7 @@ package pl.grabowski.fastserwis.model;
 
 import lombok.Getter;
 import lombok.Setter;
-import pl.grabowski.fastserwis.dto.DeviceCreateRequestDTO;
+import pl.grabowski.fastserwis.dto.device.DeviceUpdateDTO;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -31,7 +31,7 @@ public class Devices {
     private Category category;
 
     @OneToMany(mappedBy = "devices")
-    private Set<RepairOrders> repairOrders;
+    private Set<RepairOrder> repairOrders;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Client_id")
@@ -43,5 +43,6 @@ public class Devices {
         this.producer = updateDevice.getProducer();
         this.model = updateDevice.getModel();
         this.serialNumber = updateDevice.getSerialNumber();
+        this.category = updateDevice.getCategory();
     }
 }

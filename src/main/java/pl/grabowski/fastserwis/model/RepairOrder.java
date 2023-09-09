@@ -1,17 +1,21 @@
 package pl.grabowski.fastserwis.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import pl.grabowski.fastserwis.dto.order.RepairOrderUpdateRequest;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 @Entity
 @Getter
-@Table(name = "Repair_orders")
-public class RepairOrders {
-
+@Setter
+@Table(name = "repair_orders")
+@NoArgsConstructor
+public class RepairOrder {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Column(name = "Order_id")
@@ -56,4 +60,12 @@ public class RepairOrders {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Order_type_id")
     private OrderTypes orderType;
+
+    public void update(RepairOrderUpdateRequest newOrderDTO) {
+        this.endDate = newOrderDTO.getEndDate();
+        this.faultDescription = newOrderDTO.getFaultDescription();
+        this.repairDescription = newOrderDTO.getRepairDescription();
+        this.repairPrice = newOrderDTO.getRepairPrice();
+        this.partsPrice = newOrderDTO.getPartsPrice();
+    }
 }

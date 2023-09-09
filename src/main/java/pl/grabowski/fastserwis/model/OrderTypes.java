@@ -11,11 +11,11 @@ public class OrderTypes {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Order_type_id")
-    private Integer orderTypeId;
+    private Long orderTypeId;
 
     @Column(name = "Type_name")
     private String typeName;
 
     @OneToMany(mappedBy = "orderType")
-    private Set<RepairOrders> repairOrders;
+    private Set<RepairOrder> repairOrders;
 }

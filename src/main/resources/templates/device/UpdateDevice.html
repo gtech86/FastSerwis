@@ -41,9 +41,12 @@
                     </div>
 
                     <div class="col-md-4">
-                        <label for="category" class="form-label">Kategoria:</label>
-                        <select class="form-control" id="category" th:field="${deviceDTO.category}">
-                            <option th:each="category : ${categories}" th:value="${category.categoryId}" th:text="${category.categoryName}"></option>
+                        <label for="categoryId" class="form-label">Kategoria:</label>
+                        <select class="form-control" id="categoryId" th:field="${deviceDTO.categoryId}">
+                            <option th:each="category : ${categories}"
+                                    th:value="${category.categoryId}"
+                                    th:text="${category.categoryName}"
+                                    th:selected="${deviceDTO.categoryId == selectedValue}"></option>
                         </select>
                     </div>
                 </div>
@@ -53,11 +56,8 @@
                         <button type="submit" class="btn btn-primary">Zapisz</button>
                     </div>
                         <div class=" col-md-2 d-grid">
-                            <a class="btn btn-primary" th:href="@{/device/{deviceId}(deviceId=${deviceDTO.deviceId})}" role="button">Anuluj</a>
+                            <a class="btn btn-primary" th:href="@{/device/{Id}(Id=${deviceDTO.deviceId})}" role="button">Anuluj</a>
                         </div>
-
-
-
             </form>
             </div>
         </div>

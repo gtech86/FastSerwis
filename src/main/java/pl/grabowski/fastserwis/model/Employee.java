@@ -40,7 +40,7 @@ public class Employee {
     private Roles roles;
 
     @OneToMany(mappedBy = "employees")
-    private Set<RepairOrders> repairOrders;
+    private Set<RepairOrder> repairOrders;
 
     public Employee() {
     }

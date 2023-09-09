@@ -5,5 +5,5 @@ import org.springframework.stereotype.Repository;
 import pl.grabowski.fastserwis.model.OrderTypes;
 
 @Repository
-public interface OrderTypesRepo extends CrudRepository<OrderTypes, Integer> {
+public interface OrderTypesRepo extends AbstractRepository<OrderTypes> {
 }

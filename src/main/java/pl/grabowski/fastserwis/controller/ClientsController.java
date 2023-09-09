@@ -7,12 +7,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import pl.grabowski.fastserwis.dto.CreateClientRequest;
-import pl.grabowski.fastserwis.dto.UpdateClientRequest;
+import pl.grabowski.fastserwis.dto.client.CreateClientRequest;
+import pl.grabowski.fastserwis.dto.client.UpdateClientRequest;
 import pl.grabowski.fastserwis.model.Client;
+import pl.grabowski.fastserwis.model.Devices;
 import pl.grabowski.fastserwis.service.ClientsService;
+import pl.grabowski.fastserwis.service.mapper.DeviceMapper;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -22,6 +25,7 @@ import java.util.stream.Collectors;
 public class ClientsController {
     private final ClientsService clientsService;
     private final ModelMapper mapper;
+    private final DeviceMapper deviceMapper;
 
     @GetMapping("/{clientId}")
     public String getClientById(Model model,
@@ -29,6 +33,7 @@ public class ClientsController {
         var client = clientsService.getClientById(clientId);
         if(client.isPresent()){
             model.addAttribute("client", client.get());
+            model.addAttribute("devices", new ArrayList<>(client.get().getDevices()));
             return "/client/client";
         }
         model.addAttribute("errorMessage", "Brak klienta o podanym numerze w systemie!! :(");

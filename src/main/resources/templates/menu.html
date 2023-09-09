@@ -14,8 +14,7 @@
                         Zlecenia
                     </a>
                     <ul class="dropdown-menu dropdown-menu-dark">
-                        <li><a class="dropdown-item" href="/orders/search">Szukaj</a></li>
-                        <li><a class="dropdown-item" href="/orders/add">Dodaj</a></li>
+                        <li><a class="dropdown-item" href="/orders/find">Szukaj</a></li>
                         <li><a class="dropdown-item" href="/orders/search?ordersStatus=Nowe">Nowe</a></li>
                         <li><a class="dropdown-item" href="/orders/search?ordersStatus=Zamknięte">Zamknięte</a></li>
                         <li><a class="dropdown-item" href="/orders/search?ordersStatus=Realizowane">Realizowane</a></li>
@@ -23,35 +22,15 @@
                         <li><a class="dropdown-item" href="/orders/search?ordersStatus=Do wydania">Do wydania</a></li>
                     </ul>
                 </li>
-
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="/" role="button" data-bs-toggle="dropdown"
-                       aria-expanded="true">
-                        Klienci
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-dark">
-                        <li><a class="dropdown-item" href="/clients/find?page=1">Szukaj</a></li>
-                        <li><a class="dropdown-item" href="/clients/add">Dodaj</a></li>
-                    </ul>
+                <li class="nav-item">
+                    <a class="nav-link" href="/clients/find?page=1">Klienci</a>
                 </li>
-
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="/" role="button" data-bs-toggle="dropdown"
-                       aria-expanded="true">
-                        Urządzenia
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-dark">
-                        <li><a class="dropdown-item" href="/device/find">Szukaj</a></li>
-                        <li><a class="dropdown-item" href="/device/add">Dodaj</a></li>
-                    </ul>
+                <li class="nav-item">
+                    <a class="nav-link" href="/device/find">Urządzenia</a>
                 </li>
 
 
             </ul>
-            <form class="d-flex" role="search">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
-            </form>
         </div>
     </div>
 </nav>

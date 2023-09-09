@@ -19,7 +19,7 @@
             </div>
 
             <div  class="card-body">
-                <div class = "row">
+                <div class = "row g-3">
                     <form class="row g-3" action="#" th:action="@{/device/find}">
                         <div class="row">
                             <div class="col-md-4">
@@ -33,41 +33,49 @@
                             </div>
                         </div>
 
-                        <div class="row">
+                        <div class="row g-3">
                             <div class="col-md-3">
                                 <label for="serialNumber" class="form-label">Nr. Seryjny</label>
                                 <input type="text" class="form-control" id="serialNumber" th:name="serialNumber">
                             </div>
                         </div>
 
-
+                        <div class="row g-3">
+                            <div class="col-md-4">
+                                <label for="categoryId" class="form-label">Kategoria:</label>
+                                <select class="form-control" id="categoryId" th:name="categoryId">
+                                    <option value="">Wybierz kategorię</option>
+                                    <option th:each="cat : ${categories}" th:value="${cat.categoryId}" th:text="${cat.categoryName}"></option>
+                                </select>
+                            </div>
+                        </div>
                         <div class="col-12">
                             <button type="submit" class="btn btn-primary">Szukaj</button>
                         </div>
                     </form>
                 </div>
-                <div class = "row">
+                <div class = "row container">
                     <table class="table">
                         <thead>
                         <tr>
-                            <th>Producent</th>
-                            <th>Model</th>
-                            <th>Numer seryjny</th>
+                            <th scope="col">Producent</th>
+                            <th scope="col">Model</th>
+                            <th scope="col">Numer seryjny</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr th:each="device: ${devices}">
+                        <tr scope="row" th:each="device: ${devices}">
                             <td th:text = "${device.Producer}"></td>
                             <td th:text = "${device.Model}"></td>
                             <td th:text = "${device.SerialNumber}"></td>
-                            <td><a th:href="@{'/clients/'+${device.DeviceId}}">
+                            <td><a th:href="@{'/device/'+${device.DeviceId}}">
                                 <img th:src="@{/images/info.png}" style="width:32px;height:32px" />
                             </a></td>
                         </tr>
                         </tbody>
                     </table>
                 </div>
-                <div class ="row">
+                <div class ="row g-3">
                     <div th:if = "${totalPages > 1}">
                         <div  class="container-sm align-content-sm-center">
             <span th:each="i: ${#numbers.sequence(1, totalPages)}">

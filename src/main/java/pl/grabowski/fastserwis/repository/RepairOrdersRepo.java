@@ -6,55 +6,53 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import pl.grabowski.fastserwis.dto.RepairOrderExtendedResponse;
 import pl.grabowski.fastserwis.dto.RepairOrdersSimpleDto;
-import pl.grabowski.fastserwis.dto.RepairOrdersSimpleResponse;
-import pl.grabowski.fastserwis.model.RepairOrders;
-import pl.grabowski.fastserwis.model.Status;
+import pl.grabowski.fastserwis.model.RepairOrder;
 
 import java.util.List;
 
 @Repository
-public interface RepairOrdersRepo extends CrudRepository<RepairOrders, Long> {
+public interface RepairOrdersRepo extends AbstractRepository<RepairOrder> {
     /* @Query(value = "select ca.categoryName, em.lastName, ro.orderDate, ro.expectedEndDate, ro.faultDescription, st.statusName " +
              "from RepairOrders ro join ro.devices dv join ro.employees em join dv.categories ca join ro.status st")*/
     @Query(value = "select new pl.grabowski.fastserwis.dto.RepairOrdersSimpleDto(" +
             "ro.orderId, ca.categoryName, cl.lastName, ro.orderDate, ro.expectedEndDate, ro.faultDescription," +
-            "st.statusName) from RepairOrders ro join ro.status st join ro.devices dv join dv.client cl  join dv.category ca")
+            "st.statusName) from RepairOrder ro join ro.status st join ro.devices dv join dv.client cl  join dv.category ca")
     List<RepairOrdersSimpleDto> getSimpleRepairOrders();
 
 
-    @Query(value = "select ro.Order_id as orderId, " +
-            "ro.Order_date as orderDate, " +
-            "ro.End_date as endDate, " +
-            "ro.Expected_end_date as expectedEndDate, " +
-            "ro.Fault_description as faultDescription, " +
-            "ro.Repair_description as repairDescription, " +
-            "ro.Charger as charger, " +
-            "ro.Repair_price as repairPrice, " +
-            "ro.Parts_price as partPrice, " +
-            "os.Type_name as orderType, " +
-            "st.Status_name as statusName," +
-            "dv.Device_id as deviceId," +
-            "dv.Producer as deviceProducer," +
-            "dv.Model as deviceModel," +
-            "dv.Serial_number as deviceSerialNumber," +
-            "em.First_name as employeeFirstName," +
-            "em.Last_name as employeeLastName," +
-            "em.Phone as employeePhone," +
-            "cl.Client_id as clientId," +
-            "cl.First_name as clientFirstName," +
-            "cl.Last_name as clientLastName," +
-            "cl.Phone as clientPhone from Repair_orders ro " +
-            "join Devices dv on ro.Device_id = dv.Device_id " +
-            "join Employees em on ro.Employee_id = em.Employee_id " +
-            "join Categories ca on dv.Category_id = ca.Category_id " +
-            "join Clients cl on ro.Client_id = cl.Client_id " +
-            "join Status st on ro.Status_id = st.Status_id " +
-            "join Order_types os on ro.Order_type_id = os.Order_type_id where ro.Order_id = :orderId", nativeQuery = true)
+    @Query(value = "select ro.order_id as orderId, " +
+            "ro.order_date as orderDate, " +
+            "ro.end_date as endDate, " +
+            "ro.expected_end_date as expectedEndDate, " +
+            "ro.fault_description as faultDescription, " +
+            "ro.repair_description as repairDescription, " +
+            "ro.charger as charger, " +
+            "ro.repair_price as repairPrice, " +
+            "ro.parts_price as partPrice, " +
+            "os.type_name as orderType, " +
+            "st.status_name as statusName," +
+            "dv.device_id as deviceId," +
+            "dv.producer as deviceProducer," +
+            "dv.model as deviceModel," +
+            "dv.serial_number as deviceSerialNumber," +
+            "em.first_name as employeeFirstName," +
+            "em.last_name as employeeLastName," +
+            "em.phone as employeePhone," +
+            "cl.client_id as clientId," +
+            "cl.first_name as clientFirstName," +
+            "cl.last_name as clientLastName," +
+            "cl.phone as clientPhone from repair_orders ro " +
+            "join devices dv on ro.device_id = dv.device_id " +
+            "join employees em on ro.employee_id = em.employee_id " +
+            "join categories ca on dv.category_id = ca.category_id " +
+            "join clients cl on ro.client_id = cl.client_id " +
+            "join status st on ro.status_id = st.status_id " +
+            "join order_types os on ro.order_type_id = os.order_type_id where ro.order_id = :orderId", nativeQuery = true)
     RepairOrderExtendedResponse getExtendedRepairOrders(Long orderId);
 
     @Query(value = "select new pl.grabowski.fastserwis.dto.RepairOrdersSimpleDto(" +
             "ro.orderId, ca.categoryName, cl.lastName, ro.orderDate, ro.expectedEndDate, ro.faultDescription," +
-            "st.statusName) from RepairOrders ro join ro.status st join ro.devices dv join dv.client cl join dv.category ca " +
+            "st.statusName) from RepairOrder ro join ro.status st join ro.devices dv join dv.client cl join dv.category ca " +
             "WHERE st.statusName = :status")
     List<RepairOrdersSimpleDto> getRepairOrdersByStatus(@Param("status") String statusName);
 }

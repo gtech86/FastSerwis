@@ -5,15 +5,19 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import pl.grabowski.fastserwis.dto.SimpleEmployeeDTO;
 import pl.grabowski.fastserwis.model.Client;
 import pl.grabowski.fastserwis.model.Employee;
 import pl.grabowski.fastserwis.repository.EmployeeRepo;
+import pl.grabowski.fastserwis.service.mapper.EmployeeMapper;
+
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 public class EmployeeService {
     private final EmployeeRepo employeeRepo;
+    private final EmployeeMapper employeeMapper;
 
     @Value("${page.size}")
     private int pageSize;
@@ -43,5 +47,9 @@ public class EmployeeService {
 
     public List<Employee> searchEmployeesByLastName(String lastName) {
         return employeeRepo.getAllByLastNameIsLike(lastName);
+    }
+
+    public List<SimpleEmployeeDTO> getAllSimpleEmployee(){
+        return employeeMapper.toDto(employeeRepo.findAll());
     }
 }

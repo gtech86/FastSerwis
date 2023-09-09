@@ -4,28 +4,27 @@
     <meta charset="UTF-8">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Szczegóły zlecenia</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
     <script type="text/javascript" th:src = "@{/scripts/includeHtml.js}"></script>
+    <script type="text/javascript">
+        window.addEventListener('load', function() {
+            window.print();
+        });
+    </script>
 </head>
 <body style="background-color: rgba(0,0,255,0.1);">
 
 <div class="mh-100" >
-    <div th:replace="menu :: navbar" ></div>
-
-
     <div class="container-xl py-5">
         <div class="card" style="border-radius: 10px;">
             <div class="card-header px-4 py-3">
-                <h5 class="text-muted mb-0">Szczegóły zlecenia</h5>
+                <h5 class="text-muted mb-0">Potwierdzenie przyjęcia zgłoszenia</h5>
             </div>
 
             <div class="card-body p-4">
                 <div class="row">
 
-                    <div class="col-4 px-5 py-3">
-                        <p class="fw-bolder">Status</p>
-                        <p><span th:text = "${order.status.StatusName}"></span></p>
+                    <div class="col-6 px-5 py-3">
                         <p class="fw-bolder">Typ zlecenia</p>
                         <p><span th:text = "${order.orderType.typeName}"></span></p>
                         <p class="fw-bolder">Serwisant</p>
@@ -36,39 +35,55 @@
                         <p><span th:text = "${#temporals.format(order.expectedEndDate, 'yyyy-MM-dd HH:mm')}"></span></p>
                     </div>
 
-                <div class="col-4 px-5 py-3">
+                <div class="col-6 px-5 py-3">
                     <p class="fw-bolder">Klient</p>
                     <P><span th:text = "${client.firstName} + ' ' + ${client.lastName}"></span>
-                        <a th:href="@{'/clients/'+${client.clientId}}">
-                            <img th:src="@{/images/info.png}" style="width:32px;height:32px" />
-                        </a>
                     </P>
                     <p>Tel: <span th:text = "${client.Phone}"></span></p>
 
-                    <p class="fw-bolder">Opis usterki</p>
-                    <p><span th:text = "${order.faultDescription}"></span></p>
-                </div>
-
-                <div class="col-4 px-5 py-3">
                     <p class="fw-bolder">Urządzenie</p>
                     <p><span th:text = "${order.devices.producer} + ' ' + ${order.devices.model}"></span>
-                        <a th:href="@{'/device/'+${order.devices.deviceId}}">
-                            <img th:src="@{/images/info.png}" style="width:32px;height:32px" />
-                        </a>
                     </p>
                     <p>Numer seryjny: <span th:text = "${order.devices.serialNumber}"></span></p>
 
-                    <p class="fw-bolder">Opis naprawy</p>
-                    <p><span th:text = "${order.repairDescription}"></span></p>
-                </div>
+                    <div class="col-2">
+                        <label class="form-label">Ładowarka:</label>
+                        <div  th:if="${order.charger}" th:text="'Tak'">Tak</div>
+                        <div  th:unless="${order.charger}" th:text="'Nie'">Nie</div>
+                    </div>
 
                 </div>
-
-                <div class="row">
-                    <div class=" col-2 d-grid gap-2">
-                        <a class="btn btn-primary" th:if="${order.status.StatusName != 'Zamknięte'}"  th:href="@{/orders/edit(deviceId=${order.devices.deviceId}, clientId=${client.clientId},orderId=${order.orderId})}" role="button">Edytuj</a>
+                </div>
+                <div class="card-body p-4">
+                    <div class="row">
+                        <div class="col-12 px-5 py-3">
+                            <p class="fw-bolder">Opis usterki</p>
+                            <p><span th:text = "${order.faultDescription}"></span></p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 px-5 py-3">
+                            <p class="fw-bolder">Opis naprawy</p>
+                            <p><span th:text = "${order.repairDescription}"></span></p>
+                        </div>
                     </div>
                 </div>
+                <div class="card-body p-4">
+                    <div class="row">
+                        <div class="col-6 px-5 py-3">
+                            <p class="fw-bolder">Podpis serwisu:
+                                ........................</p>
+                        </div>
+                        <div class="col-6 px-5 py-3">
+                            <p class="fw-bolder">Podpis klienta:
+                                ........................</p>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
             </div>
 
         </div>

@@ -1,10 +1,10 @@
-package pl.grabowski.fastserwis.dto;
+package pl.grabowski.fastserwis.dto.client;
 
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import pl.grabowski.fastserwis.dto.device.DeviceDTO;
 
 import java.util.List;
 

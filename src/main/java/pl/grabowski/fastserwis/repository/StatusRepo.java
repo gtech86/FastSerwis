@@ -5,6 +5,6 @@ import org.springframework.stereotype.Repository;
 import pl.grabowski.fastserwis.model.Status;
 
 @Repository
-public interface StatusRepo extends CrudRepository<Status, Integer> {
+public interface StatusRepo extends CrudRepository<Status, Long> {
     Status getStatusByStatusNameIsLike(String statusName);
 }

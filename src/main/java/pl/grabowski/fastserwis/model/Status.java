@@ -12,11 +12,11 @@ public class Status {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Column(name = "Status_id")
-    private Integer statusId;
+    private Long statusId;
 
     @Column(name = "Status_name")
     private String statusName;
 
     @OneToMany(mappedBy = "status")
-    private Set<RepairOrders> repairOrders;
+    private Set<RepairOrder> repairOrders;
 }

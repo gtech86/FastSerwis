@@ -12,41 +12,87 @@
 
   <div th:replace="menu :: navbar" ></div>
 
-  <div  class="container-sm">
-    <h1 class="display-3">Zlecenia</h1>
-    <table class="table table-striped">
-      <thead>
-      <tr>
-        <th>Kategoria</th>
-        <th>Serwisant</th>
-        <th>Przyjęcie</th>
-        <th>Termin</th>
-        <th>Usterka</th>
-        <th>Status</th>
-        <th> </th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr th:each="order: ${orders}">
-        <td th:text = "${order.CategoryName}"></td>
-        <td th:text = "${order.LastName}"></td>
-        <td th:text = "${order.OrderDate}"></td>
-        <td th:text = "${order.ExpectedEndDate}"></td>
-        <td th:text = "${order.FaultDescription}"></td>
-        <td th:text = "${order.StatusName}"></td>
-        <td><a th:href="@{'/orders/'+${order.OrderId}}">
-          <img th:src="@{/images/info.png}" style="width:32px;height:32px" />
-        </a></td>
-      </tr>
-      </tbody>
-    </table>
+  <div class="container-xl py-5">
+    <div class="card" style="border-radius: 10px;">
+      <div class="card-header px-4 py-3">
+        <h5 class="text-muted mb-0">Szukaj zleceń</h5>
+      </div>
+      <div  class="card-body">
+        <div class = "row g-3">
+          <form class="row g-3" action="#" th:action="@{/orders/find}">
+            <div class="row">
+              <div class="col-md-4">
+                <label for="order" class="form-label">Numer zlecenia:</label>
+                <input type="text" class="form-control" id="order" th:name="orderId">
+              </div>
 
-    <button
-            type="button" class="btn btn-success"
-            style="--bs-btn-padding-y: .45rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .95rem;"
-    >Dodaj</button>
+              <div class="col-md-4">
+                  <label for="serialNumber" class="form-label">Nr. Seryjny</label>
+                  <input type="text" class="form-control" id="serialNumber" th:name="serialNumber">
+              </div>
+              <div class="col-md-4">
+              <label for="employee" class="form-label">Serwisant:</label>
+              <select class="form-control" id="employee" th:name="employeeId">
+                <option value="">Wybierz serwisanta</option>
+                <option th:each="employee : ${employees}" th:value="${employee.employeeId}" th:text="${employee.firstName} + ' ' + ${employee.lastName}"></option>
+              </select>
+            </div>
+              <div class="row g-3">
+                <div class="col-12">
+                  <button type="submit" class="btn btn-primary">Szukaj</button>
+                </div>
+              </div>
+
+
+          </form>
+        </div>
+
+      </div>
+      <div  class="card-body">
+        <div class="row g-3">
+          <table class="table table-striped">
+            <thead>
+            <tr>
+              <th>Numer zlecenia</th>
+              <th>Serwisant</th>
+              <th>Przyjęcie</th>
+              <th>Termin</th>
+              <th>Usterka</th>
+              <th>Status</th>
+              <th> </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="order: ${orders}">
+              <td th:text = "${order.orderId}"></td>
+              <td th:text = "${order.employees.firstName} + ' ' + ${order.employees.lastName}"></td>
+              <td th:text = "${#temporals.format(order.orderDate, 'yyyy-MM-dd HH:mm')}"></td>
+              <td th:text = "${#temporals.format(order.expectedEndDate, 'yyyy-MM-dd HH:mm')}"></td>
+              <td th:text = "${order.faultDescription}"></td>
+              <td th:text = "${order.status.statusName}"></td>
+              <td><a th:href="@{'/orders/'+${order.orderId}}">
+                <img th:src="@{/images/info.png}" style="width:32px;height:32px" />
+              </a></td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class ="row g-3">
+          <div th:if = "${totalPages > 1}">
+            <div  class="container-sm align-content-sm-center">
+            <span th:each="i: ${#numbers.sequence(1, totalPages)}">
+                            <a th:if="${currentPage != i}" th:href="@{'/device?page=' + ${i}}">[[${i}]]</a>
+                            <span th:unless="${currentPage != i}">[[${i}]]</span>  &nbsp; &nbsp;
+                        </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
-</div>
+
+
 
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
 <script src="/js/bootstrap.min.js"></script>
