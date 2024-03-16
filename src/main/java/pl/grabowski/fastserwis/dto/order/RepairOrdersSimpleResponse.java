@@ -1,4 +1,4 @@
-package pl.grabowski.fastserwis.dto;
+package pl.grabowski.fastserwis.dto.order;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;

@@ -10,11 +10,12 @@ import pl.grabowski.fastserwis.model.Client;
 import pl.grabowski.fastserwis.model.Employee;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface EmployeeRepo extends PagingAndSortingRepository<Employee, Long> {
     Page<Employee> findAll(Example<Employee> example, Pageable pageable);
-
+    Optional<Employee> findByUsername(String username);
     List<Employee> getAllByLastNameIsLike(String lastName);
     @Override
     List<Employee> findAll();

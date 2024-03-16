@@ -5,6 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import pl.grabowski.fastserwis.dto.client.DeviceCreateRequestDTO;
 import pl.grabowski.fastserwis.dto.device.DeviceDTO;
 import pl.grabowski.fastserwis.dto.device.DeviceSearchRequestDTO;
@@ -40,8 +41,9 @@ public class DevicesController {
     }
 
     @PostMapping("/add")
-    public String createDevice(@Valid DeviceCreateRequestDTO newDeviceDTO,  @RequestParam Long clientId) {
+    public String createDevice(@Valid DeviceCreateRequestDTO newDeviceDTO, @RequestParam Long clientId, RedirectAttributes redirectAttributes) {
         DeviceDTO addedDevice = deviceService.createDevice(clientId, newDeviceDTO);
+        redirectAttributes.addFlashAttribute("deviceAdded", true);
         return "redirect:/device/"+addedDevice.getDeviceId();
     }
 
@@ -56,8 +58,10 @@ public class DevicesController {
     }
 
     @PostMapping("/edit")
-    public String updateDevice(@Valid DeviceUpdateDTO updateDeviceDTO, @RequestParam String deviceId) {
+    public String updateDevice(@Valid DeviceUpdateDTO updateDeviceDTO, @RequestParam String deviceId,
+                               RedirectAttributes attributes) {
         deviceService.updateDevice(updateDeviceDTO);
+        attributes.addFlashAttribute("deviceAdded", true);
         return "redirect:/device/"+deviceId;
     }
 

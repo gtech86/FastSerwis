@@ -1,12 +1,18 @@
 <!DOCTYPE html>
-<html xmlns:th="http://thymeleaf.org" lang="pl">
+<html xmlns:th="http://thymeleaf.org"  lang="pl">
 <head>
     <meta charset="UTF-8">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Pracownicy</title>
     <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-image: url('/images/background.jpg');
+            background-size: cover;
+        }
 
+    </style>
 </head>
     <body style="background-color: rgba(0,0,255,0.1);">
         <div th:replace="menu :: navbar" ></div>
@@ -16,6 +22,37 @@
                         <h5 class="text-muted mb-0">Lista pracowników</h5>
                     </div>
                     <div class="card-body">
+                        <div class = "row g-3">
+                            <form class="row g-3" action="#" th:action="@{/employees/find}">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label for="firstName" class="form-label">Imię:</label>
+                                        <input type="text" class="form-control" id="firstName" th:name="firstName">
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <label for="lastName" class="form-label">Nazwisko:</label>
+                                        <input type="text" class="form-control" id="lastName" th:name="lastName">
+                                    </div>
+                                </div>
+
+                                <div class="row g-3">
+                                    <div class="col-md-3">
+                                        <label for="mail" class="form-label">E-Mail:</label>
+                                        <input type="text" class="form-control" id="mail" th:name="mail">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="phone" class="form-label">Telefon:</label>
+                                        <input type="text" class="form-control" id="phone" th:name="phone">
+                                    </div>
+                                </div>
+
+
+                                <div class="col-12">
+                                    <button type="submit" class="btn btn-primary">Szukaj</button>
+                                </div>
+                            </form>
+                        </div>
                         <div class="row">
                             <table class="table table-striped">
                                 <thead>
@@ -32,6 +69,17 @@
                                         <td th:text = "${employee.lastName}"></td>
                                         <td th:text = "${employee.Phone}"></td>
                                         <td th:text = "${employee.Mail}"></td>
+                                        <td th:if="${employee.username != currentUsername}">
+                                       <a th:href="@{'/employees/block/'+${employee.employeeId}}">
+                                            <img th:src="@{/images/block.png}" style="width:32px;height:32px" />
+                                        </a>
+                                        </td>
+                                        <td th:if="${employee.username == currentUsername}">
+                                            <div style="width: 32px; height: 32px;"></div>
+                                        </td>
+                                        <td><a th:href="@{'/employees/'+${employee.employeeId}}">
+                                            <img th:src="@{/images/info.png}" style="width:32px;height:32px" />
+                                        </a></td>
                                     </tr>
                                     </tbody>
                                 </table>

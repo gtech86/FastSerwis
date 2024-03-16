@@ -1,4 +1,4 @@
-package pl.grabowski.fastserwis.dto;
+package pl.grabowski.fastserwis.dto.order;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;

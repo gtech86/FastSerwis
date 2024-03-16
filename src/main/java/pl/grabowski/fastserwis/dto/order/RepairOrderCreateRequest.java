@@ -1,19 +1,26 @@
-package pl.grabowski.fastserwis.dto;
+package pl.grabowski.fastserwis.dto.order;
 
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import pl.grabowski.fastserwis.dto.device.DeviceDTO;
+import pl.grabowski.fastserwis.model.Devices;
+import pl.grabowski.fastserwis.model.Employee;
 import pl.grabowski.fastserwis.model.OrderTypes;
+import pl.grabowski.fastserwis.model.Status;
 
+import javax.persistence.Column;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
-public class RepairOrderDTO {
+public class RepairOrderCreateRequest {
 
     private Long orderId;
 
@@ -33,11 +40,9 @@ public class RepairOrderDTO {
 
     private BigDecimal partsPrice;
 
-    private DeviceDTO devices;
+    private Status status;
 
-    private SimpleEmployeeDTO employees;
+    private Long employeeId;
 
-    private StatusDTO status;
-
-    private OrderTypes orderType;
+    private Long orderTypeId;
 }

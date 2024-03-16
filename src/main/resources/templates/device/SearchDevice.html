@@ -6,6 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Wyszukaj urządzenia</title>
     <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-image: url('/images/background.jpg');
+            background-size: cover;
+        }
+
+    </style>
 </head>
 <body style="background-color: rgba(0,0,255,0.1);">
 
@@ -79,7 +86,7 @@
                     <div th:if = "${totalPages > 1}">
                         <div  class="container-sm align-content-sm-center">
             <span th:each="i: ${#numbers.sequence(1, totalPages)}">
-                            <a th:if="${currentPage != i}" th:href="@{'/device?page=' + ${i}}">[[${i}]]</a>
+                            <a th:if="${currentPage != i}" th:href="@{'/device/find?page=' + ${i}}">[[${i}]]</a>
                             <span th:unless="${currentPage != i}">[[${i}]]</span>  &nbsp; &nbsp;
                         </span>
                         </div>

@@ -1,4 +1,4 @@
-package pl.grabowski.fastserwis.dto;
+package pl.grabowski.fastserwis.dto.order;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -14,5 +14,6 @@ public class RepairOrdersSimpleDto {
     private LocalDateTime orderDate;
     private LocalDateTime expectedEndDate;
     private String faultDescription;
+    private String serialNumber;
     private String statusName;
 }

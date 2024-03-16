@@ -1,11 +1,10 @@
 package pl.grabowski.fastserwis.repository;
 
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-import pl.grabowski.fastserwis.dto.RepairOrderExtendedResponse;
-import pl.grabowski.fastserwis.dto.RepairOrdersSimpleDto;
+import pl.grabowski.fastserwis.dto.order.RepairOrderExtendedResponse;
+import pl.grabowski.fastserwis.dto.order.RepairOrdersSimpleDto;
 import pl.grabowski.fastserwis.model.RepairOrder;
 
 import java.util.List;
@@ -14,9 +13,10 @@ import java.util.List;
 public interface RepairOrdersRepo extends AbstractRepository<RepairOrder> {
     /* @Query(value = "select ca.categoryName, em.lastName, ro.orderDate, ro.expectedEndDate, ro.faultDescription, st.statusName " +
              "from RepairOrders ro join ro.devices dv join ro.employees em join dv.categories ca join ro.status st")*/
-    @Query(value = "select new pl.grabowski.fastserwis.dto.RepairOrdersSimpleDto(" +
+    @Query(value = "select new pl.grabowski.fastserwis.dto.order.RepairOrdersSimpleDto(" +
             "ro.orderId, ca.categoryName, cl.lastName, ro.orderDate, ro.expectedEndDate, ro.faultDescription," +
-            "st.statusName) from RepairOrder ro join ro.status st join ro.devices dv join dv.client cl  join dv.category ca")
+            "dv.serialNumber, st.statusName) from RepairOrder ro join ro.status st join ro.devices dv join dv.client cl  join dv.category ca " +
+            "where st.statusName not like 'Zamknięte' order by ro.expectedEndDate asc")
     List<RepairOrdersSimpleDto> getSimpleRepairOrders();
 
 
@@ -50,9 +50,9 @@ public interface RepairOrdersRepo extends AbstractRepository<RepairOrder> {
             "join order_types os on ro.order_type_id = os.order_type_id where ro.order_id = :orderId", nativeQuery = true)
     RepairOrderExtendedResponse getExtendedRepairOrders(Long orderId);
 
-    @Query(value = "select new pl.grabowski.fastserwis.dto.RepairOrdersSimpleDto(" +
+    @Query(value = "select new pl.grabowski.fastserwis.dto.order.RepairOrdersSimpleDto(" +
             "ro.orderId, ca.categoryName, cl.lastName, ro.orderDate, ro.expectedEndDate, ro.faultDescription," +
-            "st.statusName) from RepairOrder ro join ro.status st join ro.devices dv join dv.client cl join dv.category ca " +
+            "dv.serialNumber, st.statusName) from RepairOrder ro join ro.status st join ro.devices dv join dv.client cl join dv.category ca " +
             "WHERE st.statusName = :status")
     List<RepairOrdersSimpleDto> getRepairOrdersByStatus(@Param("status") String statusName);
 }

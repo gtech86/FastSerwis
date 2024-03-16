@@ -4,12 +4,29 @@
     <meta charset="UTF-8">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Szczegóły zlecenia</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
-    <script type="text/javascript" th:src = "@{/scripts/includeHtml.js}"></script>
+    <title>Karta zlecenia</title>
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-image: url('/images/background.jpg');
+            background-size: cover;
+        }
+    </style>
 </head>
 <body style="background-color: rgba(0,0,255,0.1);">
-
+<!-- Modal -->
+<div class="modal fade" id="savedModal" tabindex="-1" role="dialog" aria-labelledby="savedModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                Zlecenie zostało zapisane.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="mh-100" >
     <div th:replace="menu :: navbar" ></div>
 
@@ -17,7 +34,7 @@
     <div class="container-xl py-5">
         <div class="card" style="border-radius: 10px;">
             <div class="card-header px-4 py-3">
-                <h5 class="text-muted mb-0">Szczegóły zlecenia</h5>
+                <h5 class="text-muted mb-0">Karta zlecenia</h5>
             </div>
 
             <div class="card-body p-4">
@@ -60,6 +77,12 @@
 
                     <p class="fw-bolder">Opis naprawy</p>
                     <p><span th:text = "${order.repairDescription}"></span></p>
+
+                    <p class="fw-bolder">Cena części</p>
+                    <p><span th:text = "${order.partsPrice}"></span></p>
+
+                    <p class="fw-bolder">Cena naprawy</p>
+                    <p><span th:text = "${order.repairPrice}"></span></p>
                 </div>
 
                 </div>
@@ -67,6 +90,9 @@
                 <div class="row">
                     <div class=" col-2 d-grid gap-2">
                         <a class="btn btn-primary" th:if="${order.status.StatusName != 'Zamknięte'}"  th:href="@{/orders/edit(deviceId=${order.devices.deviceId}, clientId=${client.clientId},orderId=${order.orderId})}" role="button">Edytuj</a>
+                    </div>
+                    <div class=" col-2 d-grid gap-2">
+                        <a class="btn btn-primary"  th:href="@{/orders/download/{id}(id=${order.orderId})}" role="button">Drukuj potwierdzenie</a>
                     </div>
                 </div>
             </div>
@@ -77,8 +103,15 @@
 
 </div>
 
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"
+        integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+        crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js" integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous"></script>
-
+<script src="/js/bootstrap.min.js"></script>
+<script th:if="${orderAdded}">
+    $(document).ready(function() {
+        $('#savedModal').modal('show');
+    });
+</script>
 </body>
 </html>

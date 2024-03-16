@@ -25,45 +25,56 @@
     <div class="container-xl py-5">
         <div class="card" style="border-radius: 10px;">
             <div class="card-header px-4 py-3">
-                <h5 class="text-muted mb-0">Edycja urządzenia</h5>
+                <h5 class="text-muted mb-0">Edycja pracownika</h5>
             </div>
             <div class="card-body p-4">
 
-            <form class="row g-3" action="#" th:action="@{/device/edit(deviceId=${deviceDTO.deviceId})}" method="post" th:object="${deviceDTO}">
+            <form class="row g-3" action="#" th:action="@{/employees/edit(employeeId=${employeeDTO.employeeId})}" method="post" th:object="${employeeDTO}">
                 <div class="row">
                     <div class="col-md-4">
-                        <label for="producer" class="form-label">Producent:</label>
-                        <input type="text" class="form-control" id="producer" th:field="${deviceDTO.producer}">
+                        <label for="firstName" class="form-label">Imię:</label>
+                        <input type="text" class="form-control" id="firstName" th:field="${employeeDTO.firstName}">
                     </div>
 
                     <div class="col-md-4">
-                        <label for="model" class="form-label">Model:</label>
-                        <input type="text" class="form-control" id="model" th:field="${deviceDTO.model}">
+                        <label for="lastName" class="form-label">Nazwisko:</label>
+                        <input type="text" class="form-control" id="lastName" th:field="${employeeDTO.lastName}">
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-4">
-                        <label for="serialNumber" class="form-label">Numer seryjny:</label>
-                        <input type="text" class="form-control" id="serialNumber" th:field="${deviceDTO.serialNumber}">
+                        <label for="phone" class="form-label">Telefon:</label>
+                        <input type="text" class="form-control" id="phone" th:field="${employeeDTO.phone}">
                     </div>
-
                     <div class="col-md-4">
-                        <label for="categoryId" class="form-label">Kategoria:</label>
-                        <select class="form-control" id="categoryId" th:field="${deviceDTO.categoryId}">
-                            <option th:each="category : ${categories}"
-                                    th:value="${category.categoryId}"
-                                    th:text="${category.categoryName}"
-                                    th:selected="${deviceDTO.categoryId == selectedValue}"></option>
+                        <label for="mail" class="form-label">E-mail:</label>
+                        <input type="text" class="form-control" id="mail" th:field="${employeeDTO.mail}">
+                    </div>
+                    <div class="col-md-4">
+                        <label for="role" class="form-label">Konto administratora?</label>
+                        <select id="role" th:field="${employeeDTO.isAdmin}">
+                            <option value="true">Tak</option>
+                            <option value="false">Nie</option>
                         </select>
                     </div>
                 </div>
                 <div class="row">
+                    <div class="col-md-4">
+                        <label for="haslo" class="form-label">Hasło:</label>
+                        <input type="password" class="form-control" id="haslo"  th:field="${employeeDTO.password}" required>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label for="potwierdzHaslo" class="form-label">Potwierdź hasło:</label>
+                        <input type="password" class="form-control" id="potwierdzHaslo"   th:field="${employeeDTO.password2}" required>
+                        <span th:if="${passNotEquals}" th:text="${passNotEquals}" class="error-message">Hasła nie są takie same</span>
+                    </div>
                 </div>
                         <div class=" col-md-2 d-grid">
                         <button type="submit" class="btn btn-primary">Zapisz</button>
                     </div>
                         <div class=" col-md-2 d-grid">
-                            <a class="btn btn-primary" th:href="@{/device/{Id}(Id=${deviceDTO.deviceId})}" role="button">Anuluj</a>
+                            <a class="btn btn-primary" th:href="@{/employees/{Id}(Id=${employeeDTO.employeeId},admin = ${employeeDTO.employeeId})}" role="button">Anuluj</a>
                         </div>
             </form>
             </div>

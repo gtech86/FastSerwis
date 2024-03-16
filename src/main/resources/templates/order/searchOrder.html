@@ -5,6 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Zlecenia</title>
   <link href="/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-image: url('/images/background.jpg');
+      background-size: cover;
+    }
+  </style>
 </head>
 <body style="background-color: rgba(0,0,255,0.1);">
 
@@ -27,7 +33,7 @@
               </div>
 
               <div class="col-md-4">
-                  <label for="serialNumber" class="form-label">Nr. Seryjny</label>
+                  <label for="serialNumber" class="form-label">Nr. seryjny urządzenia</label>
                   <input type="text" class="form-control" id="serialNumber" th:name="serialNumber">
               </div>
               <div class="col-md-4">
@@ -58,6 +64,7 @@
               <th>Przyjęcie</th>
               <th>Termin</th>
               <th>Usterka</th>
+              <th>N/S</th>
               <th>Status</th>
               <th> </th>
             </tr>
@@ -69,6 +76,7 @@
               <td th:text = "${#temporals.format(order.orderDate, 'yyyy-MM-dd HH:mm')}"></td>
               <td th:text = "${#temporals.format(order.expectedEndDate, 'yyyy-MM-dd HH:mm')}"></td>
               <td th:text = "${order.faultDescription}"></td>
+              <td th:text = "${order.serialNumber}"></td>
               <td th:text = "${order.status.statusName}"></td>
               <td><a th:href="@{'/orders/'+${order.orderId}}">
                 <img th:src="@{/images/info.png}" style="width:32px;height:32px" />

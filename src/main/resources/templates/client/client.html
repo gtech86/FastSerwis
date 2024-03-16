@@ -6,11 +6,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Wyszukaj klienta</title>
     <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-image: url('/images/background.jpg');
+            background-size: cover;
+        }
+    </style>
 </head>
 <body style="background-color: rgba(0,0,255,0.1);">
-
+<div th:replace="menu :: navbar" ></div>
+<!-- Modal -->
+<div class="modal fade" id="savedModal" tabindex="-1" role="dialog" aria-labelledby="savedModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                Klient został zapisany.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="mh-100" >
-    <div th:replace="menu :: navbar" ></div>
+
 
     <div class="container-xl py-5">
         <div class="card" style="border-radius: 10px;">
@@ -82,6 +101,10 @@
 
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
 <script src="/js/bootstrap.min.js"></script>
-
+<script th:if="${clientAdded}">
+    $(document).ready(function() {
+        $('#savedModal').modal('show');
+    });
+</script>
 </body>
 </html>

@@ -23,7 +23,7 @@ public class Employee {
     @Column(name = "Last_name")
     private String lastName;
 
-    @Column(name = "Username")
+    @Column(name = "Username", unique = true)
     private String username;
 
     @Column(name = "Password")
@@ -35,7 +35,10 @@ public class Employee {
     @Column(name = "Mail")
     private String mail;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @Column(name = "Block")
+    private Boolean isBlocked;
+
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "Role_id")
     private Roles roles;
 
@@ -43,5 +46,12 @@ public class Employee {
     private Set<RepairOrder> repairOrders;
 
     public Employee() {
+    }
+
+    public void update(Employee employee) {
+        this.firstName = employee.getFirstName();
+        this.lastName = employee.getLastName();
+        this.phone = employee.getPhone();
+        this.mail = employee.getMail();
     }
 }

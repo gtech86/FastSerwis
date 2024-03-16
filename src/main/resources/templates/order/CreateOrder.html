@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://thymeleaf.org" lang="pl" >
 <html xmlns:th="http://www.thymeleaf.org" lang="pl" >
+
 <head>
     <meta charset="UTF-8">
     <meta charset="utf-8">
@@ -8,6 +9,12 @@
     <title>Nowe urządzanie</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
     <script type="text/javascript" th:src = "@{/scripts/includeHtml.js}"></script>
+    <style>
+        body {
+            background-image: url('/images/background.jpg');
+            background-size: cover;
+        }
+    </style>
 </head>
 <body style="background-color: rgba(0,0,255,0.1);">
 
@@ -64,6 +71,12 @@
 
                             <p>Kod poczt.</p>
                             <p class="fw-bolder"><span th:text = "${client.postalCode}"></span></p>
+
+
+                        </div>
+                        <div class="col-4  py-3">
+                            <p>Miasto</p>
+                            <p class="fw-bolder"><span th:text = "${client.city}"></span></p>
                         </div>
                     </div>
                 </div>

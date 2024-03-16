@@ -3,6 +3,7 @@ package pl.grabowski.fastserwis.controller;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +21,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Controller
+@PreAuthorize("isAuthenticated()")
 @RequestMapping("/clients")
 @RequiredArgsConstructor
 public class ClientsController {
@@ -70,6 +72,7 @@ public class ClientsController {
         Client newClient = mapper.map(clientParameter, Client.class);
         var addedClient = clientsService.addNewClient(newClient);
         attributes.addFlashAttribute("newUser", addedClient);
+        attributes.addFlashAttribute("clientAdded", true);
         return "redirect:/clients/"+addedClient.getClientId();
     }
 

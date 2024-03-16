@@ -1,38 +1,26 @@
 package pl.grabowski.fastserwis.service;
 
 import com.lowagie.text.DocumentException;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.thymeleaf.TemplateEngine;
-import org.thymeleaf.context.Context;
 import org.thymeleaf.context.WebContext;
 import org.thymeleaf.spring5.SpringTemplateEngine;
-import org.thymeleaf.templatemode.TemplateMode;
-import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 import org.xhtmlrenderer.pdf.ITextRenderer;
-import pl.grabowski.fastserwis.controller.OrdersController;
-import pl.grabowski.fastserwis.dto.RepairOrderCreateRequest;
-import pl.grabowski.fastserwis.dto.RepairOrderDTO;
-import pl.grabowski.fastserwis.dto.RepairOrderExtendedResponse;
-import pl.grabowski.fastserwis.dto.RepairOrdersSimpleDto;
-import pl.grabowski.fastserwis.dto.device.DeviceSearchRequestDTO;
-import pl.grabowski.fastserwis.dto.order.RepairOrderSearchRequest;
+import pl.grabowski.fastserwis.dto.order.RepairOrderCreateRequest;
+import pl.grabowski.fastserwis.dto.order.RepairOrderDTO;
+import pl.grabowski.fastserwis.dto.order.RepairOrdersSimpleDto;
 import pl.grabowski.fastserwis.dto.order.RepairOrderUpdateRequest;
 import pl.grabowski.fastserwis.model.*;
 import pl.grabowski.fastserwis.repository.*;
 import pl.grabowski.fastserwis.service.mapper.RepairOrderMapper;
 
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 @Transactional

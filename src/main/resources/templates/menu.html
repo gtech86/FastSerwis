@@ -1,3 +1,4 @@
+<html xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <nav th:fragment="navbar" class="navbar navbar-expand-lg navbar-dark bg-dark id=">
     <div class="container-sm">
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -6,7 +7,7 @@
                     <a class="nav-link active" aria-current="page" href="/"></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/">Tablica</a>
+                    <a class="nav-link" href="/board">Tablica</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="/" role="button" data-bs-toggle="dropdown"
@@ -15,21 +16,43 @@
                     </a>
                     <ul class="dropdown-menu dropdown-menu-dark">
                         <li><a class="dropdown-item" href="/orders/find">Szukaj</a></li>
-                        <li><a class="dropdown-item" href="/orders/search?ordersStatus=Nowe">Nowe</a></li>
+                        <li><a class="dropdown-item" href="/orders/search?ordersStatus=Nowe">Nowo dodane</a></li>
                         <li><a class="dropdown-item" href="/orders/search?ordersStatus=Zamknięte">Zamknięte</a></li>
                         <li><a class="dropdown-item" href="/orders/search?ordersStatus=Realizowane">Realizowane</a></li>
                         <li><a class="dropdown-item" href="/orders/search?ordersStatus=Oczekujące">Oczekujące</a></li>
                         <li><a class="dropdown-item" href="/orders/search?ordersStatus=Do wydania">Do wydania</a></li>
                     </ul>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/clients/find?page=1">Klienci</a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="/" role="button" data-bs-toggle="dropdown"
+                       aria-expanded="true">
+                        Klienci
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-dark">
+                        <li><a class="dropdown-item" href="/clients/find?page=1">Szukaj</a></li>
+                        <li><a class="dropdown-item" href="/clients/add">Dodaj</a></li>
+                    </ul>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/device/find">Urządzenia</a>
                 </li>
+                <li class="nav-item dropdown" sec:authorize="hasAuthority('Admin')">
+                    <a class="nav-link dropdown-toggle" href="/" role="button" data-bs-toggle="dropdown"
+                       aria-expanded="true">
+                        Użytkownicy
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-dark">
+                        <li><a class="dropdown-item" href="/employees/find?page=1">Szukaj</a></li>
+                        <li><a class="dropdown-item" href="/employees/add">Dodaj</a></li>
+                    </ul>
+                </li>
 
 
+            </ul>
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0"> <!-- Kluczowe: ms-auto wyrównuje elementy do prawej -->
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/login?logout}">Wyloguj</a>
+                </li>
             </ul>
         </div>
     </div>

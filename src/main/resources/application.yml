@@ -19,9 +19,13 @@ spring:
     #        generate_statistics: true
     show-sql: true
 page:
-  size: 10
+  size: 7
 
 thymeleaf:
   version: 3.0.2.RELEASE
 thymeleaf-layout-dialect:
   version: 2.1.1
+
+logging:
+  level:
+    org.springframework.security: DEBUG

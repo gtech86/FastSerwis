@@ -1,20 +1,15 @@
 package pl.grabowski.fastserwis.controller;
 
-import com.lowagie.text.DocumentException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
-import org.springframework.http.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.thymeleaf.context.WebContext;
-import pl.grabowski.fastserwis.dto.RepairOrderCreateRequest;
-import pl.grabowski.fastserwis.dto.RepairOrderDTO;
-import pl.grabowski.fastserwis.dto.device.DeviceDTO;
-import pl.grabowski.fastserwis.dto.device.DeviceSearchRequestDTO;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import pl.grabowski.fastserwis.dto.order.RepairOrderCreateRequest;
+import pl.grabowski.fastserwis.dto.order.RepairOrderDTO;
 import pl.grabowski.fastserwis.dto.order.RepairOrderUpdateRequest;
-import pl.grabowski.fastserwis.model.Devices;
 import pl.grabowski.fastserwis.model.RepairOrder;
 import pl.grabowski.fastserwis.repository.OrderTypesRepo;
 import pl.grabowski.fastserwis.repository.RepairOrdersRepo;
@@ -26,12 +21,7 @@ import pl.grabowski.fastserwis.service.RepairOrdersService;
 import pl.grabowski.fastserwis.service.mapper.RepairOrderMapper;
 
 import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.util.List;
 import java.util.stream.Collectors;
 
 @Controller
@@ -48,7 +38,6 @@ public class OrdersController {
     private final EmployeeService employeeService;
     private final StatusRepo statusRepo;
     private final RepairOrderMapper repairOrderMapper;
-    private final ServletContext servletContext;
 
     @GetMapping("/add")
     public String getRepairOrderForm(Model model,
@@ -65,10 +54,12 @@ public class OrdersController {
     @PostMapping("/add")
     public String addNewOrder(@Valid RepairOrderCreateRequest newOrderDTO,
                               @RequestParam String deviceId,
-                              @RequestParam String clientId) {
+                              @RequestParam String clientId,
+                              RedirectAttributes attributes) {
 
         RepairOrderDTO addedRepairOrder =  ordersService.addOrder(Long.parseLong(deviceId), Long.parseLong(clientId), newOrderDTO);
-        return "redirect:/order/"+addedRepairOrder.getOrderId();
+        attributes.addFlashAttribute("orderAdded", true);
+        return "redirect:/orders/"+addedRepairOrder.getOrderId();
     }
 
     @GetMapping("/edit")
@@ -93,9 +84,11 @@ public class OrdersController {
     public String updateOrder(@Valid RepairOrderUpdateRequest updateOrderDTO,
                               @RequestParam String deviceId,
                               @RequestParam String clientId,
-                              @RequestParam String orderId) {
+                              @RequestParam String orderId,
+                              RedirectAttributes attributes) {
 
         RepairOrderDTO updatedRepairOrder =  ordersService.updateOrder(updateOrderDTO);
+        attributes.addFlashAttribute("orderAdded", true);
         return "redirect:/orders/"+updatedRepairOrder.getOrderId();
     }
 
@@ -132,6 +125,7 @@ public class OrdersController {
         var extendedOrder = ordersService.getExtendedRepairOrders(orderId);
             model.addAttribute("client", clientsService.getClientByDeviceId(extendedOrder.getDevices().getDeviceId()));
             model.addAttribute("order", extendedOrder);
+
             return "/order/searchOrderId";
     }
 

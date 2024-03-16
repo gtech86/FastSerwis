@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org" lang="pl" >
+<html xmlns:th="http://www.thymeleaf.org" lang="pl" >
+<head>
+    <meta charset="UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Nowe urządzanie</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <script type="text/javascript" th:src = "@{/scripts/includeHtml.js}"></script>
+    <style>
+        body {
+            background-image: url('/images/background.jpg');
+            background-size: cover;
+        }
+
+    </style>
+</head>
+<body style="background-color: rgba(0,0,255,0.1);">
+
+<div class="mh-100" >
+    <div th:replace="menu :: navbar" ></div>
+
+
+    <div class="container-xl py-5">
+        <div class="card" style="border-radius: 10px;">
+            <div class="card-header px-4 py-3">
+                <h5 class="text-muted mb-0">Nowy pracownik</h5>
+            </div>
+            <div class="card-body p-4">
+
+            <form class="row g-3" action="#" th:action="@{/employees/add}" method="post" th:object="${employeeDTO}">
+                <div class="row">
+                    <div class="col-md-4">
+                        <label for="firstName" class="form-label">Imię:</label>
+                        <input type="text" class="form-control" id="firstName" th:field="${employeeDTO.firstName}" required>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label for="lastName" class="form-label">Nazwisko:</label>
+                        <input type="text" class="form-control" id="lastName" th:field="${employeeDTO.lastName}" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <label for="phone" class="form-label">Telefon:</label>
+                        <input type="text" class="form-control" id="phone" th:field="${employeeDTO.phone}" required>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="mail" class="form-label">E-mail:</label>
+                        <input type="email" class="form-control" id="mail" th:field="${employeeDTO.mail}" required>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label for="role" class="form-label">Konto administratora?</label>
+                        <select id="role" th:field="${employeeDTO.isAdmin}" required>
+                            <option value="true">Tak</option>
+                            <option value="false">Nie</option>
+                        </select>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label for="username" class="form-label">Login:</label>
+                            <input type="text" class="form-control" id="username" th:field="${employeeDTO.username}" required>
+                            <span th:if="${usernameExist}" th:text="${usernameExist}" class="error-message">Istnieje uzytkownik o takim loginie</span>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="haslo" class="form-label">Hasło:</label>
+                            <input type="password" class="form-control" id="haslo"  th:field="${employeeDTO.password}" required>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label for="potwierdzHaslo" class="form-label">Potwierdź hasło:</label>
+                            <input type="password" class="form-control" id="potwierdzHaslo"   th:field="${employeeDTO.password2}" required>
+                            <span th:if="${passNotEquals}" th:text="${passNotEquals}" class="error-message">Hasła nie są takie same</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                </div>
+                        <div class=" col-md-2 d-grid">
+                        <button type="submit" class="btn btn-primary">Dodaj</button>
+                    </div>
+                        <div class=" col-md-2 d-grid">
+                            <a class="btn btn-primary" th:href="@{/employees/find}" role="button">Anuluj</a>
+                        </div>
+            </form>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js" integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous"></script>
+</body>
+</html>
