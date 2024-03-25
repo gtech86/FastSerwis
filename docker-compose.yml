@@ -1,5 +1,18 @@
-version: "3.9"
+version: '3.7'
+
 services:
+
+  phpmyadmin:
+    container_name: phpmyadmin
+    image: phpmyadmin/phpmyadmin:latest
+    restart: always
+    ports:
+      - 8081:80
   db:
-    container_name: epic_galois
-    image: mcr.microsoft.com/mssql/server:2019-latest
+    container_name: mysql
+    image: mysql:latest
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3307:3306"
