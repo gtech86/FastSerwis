@@ -19,6 +19,10 @@ services:
       MYSQL_DATABASE: fast_serwis
     ports:
       - "3307:3306"
+    healthcheck:
+      test: [ "CMD", "mysqladmin" ,"ping", "-h", "localhost" ]
+      timeout: 20s
+      retries: 10
 
   fast-service-backend:
     container_name: fast-service-app
