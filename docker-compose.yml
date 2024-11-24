@@ -7,12 +7,15 @@ services:
     image: phpmyadmin/phpmyadmin:latest
     restart: always
     ports:
-      - 8081:80
+      - 8081:8081
   db:
     container_name: mysql
-    image: mysql:latest
+    image: mysql:5.7
     restart: always
+    volumes:
+      - mysql:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: fast_serwis
     ports:
       - "3307:3306"

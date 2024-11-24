@@ -1,0 +1,25 @@
+pipeline {
+    agent any
+    environment {
+
+    }
+    options {
+        skipStagesAfterUnstable()
+    }
+    stages {
+        stage('clean') {
+            steps {
+                sh "chmod +x mvnw"
+                sh "./mvnw -ntp clean -P-webapp"
+            }
+
+        }
+        stage('Run') {
+            steps {
+                sh '''
+                docker compose -f docker-compose.yml up -d --build
+                '''
+            }
+        }
+    }
+}
