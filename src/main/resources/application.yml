@@ -17,6 +17,8 @@ spring:
         order_updates: true
     #        generate_statistics: true
     show-sql: true
+  flyway:
+    schemas: fast_serwis
 
 page:
   size: 7
