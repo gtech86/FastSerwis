@@ -8,15 +8,6 @@
         <version>2.7.3</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <repositories>
-        <repository>
-            <id>Vaadin Directory</id>
-            <url>https://maven.vaadin.com/vaadin-addons</url>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
     <groupId>pl.grabowski</groupId>
     <artifactId>FastSerwis</artifactId>
     <version>0.0.1-SNAPSHOT</version>
