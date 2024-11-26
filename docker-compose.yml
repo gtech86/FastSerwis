@@ -33,7 +33,7 @@ services:
       - SPRING_PROFILES_ACTIVE=default
       - SPRING_DATASOURCE_URL=jdbc:mysql://localhost:3307?rewriteBatchedStatements=true&useUnicode=yes&characterEncoding=UTF-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&connectionTimeZone=Europe/Warsaw&serverTimezone=UTC
     ports:
-      - "8080:8080"
+      - "8085:8085"
     build:
       context: .
       dockerfile: "Dockerfile"
