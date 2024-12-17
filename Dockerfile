@@ -8,6 +8,7 @@ COPY ./ ./
 RUN mvn clean package -Dmaven.test.skip
 FROM openjdk:11-jdk
 RUN apt-get update
+RUN ls -al /target/
 
 COPY --from=MAVEN_BUILD /target/*.jar /fast-service.jar
 # set the startup command to execute the jar
