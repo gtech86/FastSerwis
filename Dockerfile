@@ -26,5 +26,5 @@ RUN ls -al target
 FROM openjdk:11-jdk
 RUN apt-get update -y
 WORKDIR /
-COPY --from=MAVEN_BUILD /build/target/fast-service.jar /fast-service.jar
+COPY --from=MAVEN_BUILD /build/target/*.jar /fast-service.jar
 CMD ["java", "-jar", "/fast-service.jar"]
