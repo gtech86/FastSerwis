@@ -2,12 +2,7 @@ version: '3.7'
 
 services:
 
-  phpmyadmin:
-    container_name: phpmyadmin
-    image: phpmyadmin/phpmyadmin:latest
-    restart: always
-    ports:
-      - 8081:8081
+
   db:
     container_name: mysql
     image: mysql:5.7
@@ -15,7 +10,7 @@ services:
     volumes:
       - mysql:/var/lib/mysql
     environment:
-      MYSQL_ROOT_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: Kocyk123!
       MYSQL_DATABASE: fast_serwis
     ports:
       - "3307:3306"
@@ -24,6 +19,18 @@ services:
       timeout: 20s
       retries: 10
 
+  phpmyadmin:
+    container_name: phpmyadmin
+    image: phpmyadmin/phpmyadmin:latest
+    depends_on:
+      - db
+    restart: always
+    ports:
+      - 8083:80
+    environment:
+      PMA_HOST: db
+      MYSQL_ROOT_PASSWORD: Kocyk123!
+
   fast-service-backend:
     container_name: fast-service-app
     restart: on-failure
@@ -31,9 +38,9 @@ services:
     environment:
       - _JAVA_OPTIONS=-Xmx512m -Xms256m
       - SPRING_PROFILES_ACTIVE=default
-      - SPRING_DATASOURCE_URL=jdbc:mysql://localhost:3307?rewriteBatchedStatements=true&useUnicode=yes&characterEncoding=UTF-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&connectionTimeZone=Europe/Warsaw&serverTimezone=UTC
+      - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/fast_serwis?rewriteBatchedStatements=true&useUnicode=yes&characterEncoding=UTF-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&connectionTimeZone=Europe/Warsaw&serverTimezone=UTC
     ports:
-      - "8085:8085"
+      - "8080:8085"
     build:
       context: .
       dockerfile: "Dockerfile"

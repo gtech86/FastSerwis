@@ -1,6 +1,6 @@
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
-SET time_zone = "+00:00";
+SET time_zone = "+01:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -21,7 +21,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `categories` (
                               `category_id` bigint NOT NULL,
                               `category_name` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
 
 -- --------------------------------------------------------
 
@@ -40,7 +40,7 @@ CREATE TABLE `clients` (
                            `postal_code` varchar(255) DEFAULT NULL,
                            `street` varchar(255) DEFAULT NULL,
                            `street_number` int DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
 
 -- --------------------------------------------------------
 
@@ -55,7 +55,7 @@ CREATE TABLE `devices` (
                            `serial_number` varchar(255) DEFAULT NULL,
                            `category_id` bigint NOT NULL,
                            `client_id` bigint DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
 
 -- --------------------------------------------------------
 
@@ -73,7 +73,7 @@ CREATE TABLE `employees` (
                              `phone` varchar(255) DEFAULT NULL,
                              `username` varchar(255) DEFAULT NULL,
                              `role_id` int DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
 
 -- --------------------------------------------------------
 
@@ -84,7 +84,7 @@ CREATE TABLE `employees` (
 CREATE TABLE `order_types` (
                                `order_type_id` bigint NOT NULL,
                                `type_name` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
 
 -- --------------------------------------------------------
 
@@ -106,7 +106,7 @@ CREATE TABLE `repair_orders` (
                                  `employee_id` bigint DEFAULT NULL,
                                  `order_type_id` bigint DEFAULT NULL,
                                  `status_id` bigint DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
 
 -- --------------------------------------------------------
 
@@ -117,7 +117,7 @@ CREATE TABLE `repair_orders` (
 CREATE TABLE `roles` (
                          `role_id` int NOT NULL,
                          `role_name` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
 
 -- --------------------------------------------------------
 
@@ -128,7 +128,7 @@ CREATE TABLE `roles` (
 CREATE TABLE `status` (
                           `status_id` bigint NOT NULL,
                           `status_name` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
 
 --
 -- Indeksy dla zrzutów tabel

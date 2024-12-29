@@ -15,16 +15,21 @@
 #CMD ["java", "-jar", "/fast-service.jar"]
 
 # Build stage
-FROM maven:3.6.1-jdk-11 AS MAVEN_BUILD
-WORKDIR /build
-COPY pom.xml /build/
-COPY src /build/src/
+# Use an official Maven image as the base image
+FROM maven:3.8.4-openjdk-11-slim AS build
+# Set the working directory in the container
+WORKDIR /app
+# Copy the pom.xml and the project files to the container
+COPY pom.xml .
+COPY src ./src
+# Build the application using Maven
 RUN mvn clean package -Dmaven.test.skip
-RUN ls -al target
+# Use an official OpenJDK image as the base image
+FROM openjdk:11-jre-slim
+# Set the working directory in the container
 
-# Runtime stage
-FROM openjdk:11-jdk
-RUN apt-get update -y
-WORKDIR /
-COPY --from=MAVEN_BUILD /build/target/*.jar /fast-service.jar
-CMD ["java", "-jar", "/fast-service.jar"]
+WORKDIR /app
+COPY --from=build /app/target/*.jar ./fast-service.jar
+
+# Set the command to run the application
+ENTRYPOINT ["java", "-jar", "fast-service.jar"]
