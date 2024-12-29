@@ -21,6 +21,8 @@ public class SecurityConfiguration {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf().disable().authorizeRequests()
                 .antMatchers("/css/**", "/js/**").permitAll()
+                .antMatchers("/employees/find").permitAll()
+                .antMatchers("/employees/edit").permitAll()
                 .and()
                 .formLogin()
                 .loginPage("/login")
@@ -30,7 +32,6 @@ public class SecurityConfiguration {
                 .logout()
                 .logoutUrl("/login?logout")
                 .permitAll()
-                .invalidateHttpSession(true)
                 .deleteCookies("JSESSIONID")
                 .logoutSuccessUrl("/login");
         return http.build();
