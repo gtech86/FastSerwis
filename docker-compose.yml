@@ -40,7 +40,7 @@ services:
       - SPRING_PROFILES_ACTIVE=default
       - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/fast_serwis?rewriteBatchedStatements=true&useUnicode=yes&characterEncoding=UTF-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&connectionTimeZone=Europe/Warsaw&serverTimezone=UTC
     ports:
-      - "8080:8085"
+      - "8085:8085"
     build:
       context: .
       dockerfile: "Dockerfile"

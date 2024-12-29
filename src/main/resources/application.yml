@@ -19,6 +19,8 @@ spring:
     show-sql: true
   flyway:
     schemas: fast_serwis
+server:
+  port: 8085
 
 page:
   size: 7
