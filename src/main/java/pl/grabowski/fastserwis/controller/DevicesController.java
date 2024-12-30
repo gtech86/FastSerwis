@@ -37,14 +37,14 @@ public class DevicesController {
         model.addAttribute("clientId", Integer.valueOf(clientId));
         model.addAttribute("deviceDTO", new DeviceCreateRequestDTO());
         model.addAttribute("categories", categoryMapper.toDto(categoryRepo.findAll()));
-        return "/device/CreateDevice";
+        return "device/CreateDevice";
     }
 
     @PostMapping("/add")
     public String createDevice(@Valid DeviceCreateRequestDTO newDeviceDTO, @RequestParam Long clientId, RedirectAttributes redirectAttributes) {
         DeviceDTO addedDevice = deviceService.createDevice(clientId, newDeviceDTO);
         redirectAttributes.addFlashAttribute("deviceAdded", true);
-        return "redirect:/device/"+addedDevice.getDeviceId();
+        return "redirect:device/"+addedDevice.getDeviceId();
     }
 
     @GetMapping("/edit")
@@ -53,7 +53,7 @@ public class DevicesController {
             Model model){
         model.addAttribute("deviceDTO", deviceService.getDeviceToUpdateById(deviceId));
         model.addAttribute("categories", categoryMapper.toDto(categoryRepo.findAll()));
-        return "/device/UpdateDevice";
+        return "device/UpdateDevice";
 
     }
 
@@ -62,7 +62,7 @@ public class DevicesController {
                                RedirectAttributes attributes) {
         deviceService.updateDevice(updateDeviceDTO);
         attributes.addFlashAttribute("deviceAdded", true);
-        return "redirect:/device/"+deviceId;
+        return "redirect:device/"+deviceId;
     }
 
     @GetMapping("/{deviceId}")
@@ -72,7 +72,7 @@ public class DevicesController {
 
         model.addAttribute("device", device);
         model.addAttribute("client", deviceService.getClientByDeviceId(deviceId));
-            return "/device/Device";
+            return "device/Device";
     }
 
     @GetMapping("/find")
@@ -94,7 +94,7 @@ public class DevicesController {
         model.addAttribute("categories", categoryMapper.toDto(categoryRepo.findAll()));
         model.addAttribute("totalPages", allDevices.getTotalPages());
         model.addAttribute("currentPage", page);
-        return "/device/SearchDevice";
+        return "device/SearchDevice";
     }
 
 }
