@@ -21,8 +21,6 @@ public class SecurityConfiguration {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf().disable().authorizeRequests()
                 .antMatchers("/css/**", "/js/**").permitAll()
-                .antMatchers("/employees/find").permitAll()
-                .antMatchers("/employees/edit").permitAll()
                 .and()
                 .formLogin()
                 .loginPage("/login")
