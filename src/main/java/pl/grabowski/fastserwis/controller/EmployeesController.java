@@ -55,7 +55,7 @@ public class EmployeesController {
     public String addEmployee(
             Model model){
         model.addAttribute("employeeDTO", new EmployeeCreateRequest());
-        return "/employee/CreateEmployee";
+        return "employee/CreateEmployee";
 
     }
 
@@ -64,12 +64,12 @@ public class EmployeesController {
         if (employeeService.searchEmployeesByUsername(employeeCreateRequest.getUsername()).isPresent()) {
             model.addAttribute("usernameExist", "Istnieje już użytkownik o takim loginie!");
             model.addAttribute("employeeDTO", employeeCreateRequest);
-            return "/employee/CreateEmployee";
+            return "employee/CreateEmployee";
         }
         if(!employeeCreateRequest.getPassword().equals(employeeCreateRequest.getPassword2()) & !employeeCreateRequest.getPassword().isEmpty()){
             model.addAttribute("passNotEquals", "Hasła nie są takie same");
             model.addAttribute("employeeDTO", employeeCreateRequest);
-            return "/employee/CreateEmployee";
+            return "employee/CreateEmployee";
 
         }
 
@@ -86,7 +86,7 @@ public class EmployeesController {
 
             Model model){
         model.addAttribute("employeeDTO", employeeService.searchEmployeesById(Long.valueOf(employeeId)));
-        return "/employee/UpdateEmployee";
+        return "employee/UpdateEmployee";
 
     }
 
@@ -96,14 +96,14 @@ public class EmployeesController {
         employeeUpdateRequest.setEmployeeId(Long.valueOf(employeeId));
         employeeService.updateEmployee(employeeUpdateRequest);
         attributes.addFlashAttribute("userAdded", true);
-        return "redirect:/employees/"+employeeId;
+        return "redirect:employees/"+employeeId;
     }
 
     @GetMapping("/block/{employeeId}")
     public String getBlockEmployeeById(
                                   @PathVariable String employeeId) {
         employeeService.blockEmployee(Long.valueOf(employeeId));
-        return "redirect:/employees/find?page=1";
+        return "redirect:employees/find?page=1";
     }
 
     @GetMapping("/{employeeId}")
@@ -111,7 +111,7 @@ public class EmployeesController {
                                 @PathVariable String employeeId) {
         EmployeeCreateRequest employeeResponse = employeeService.searchEmployeesById(Long.valueOf(employeeId));
         model.addAttribute("employee", employeeResponse);
-        return "/employee/Employee";
+        return "employee/Employee";
     }
 
 }
