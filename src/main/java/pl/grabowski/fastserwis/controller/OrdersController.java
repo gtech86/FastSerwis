@@ -48,7 +48,7 @@ public class OrdersController {
         model.addAttribute("client", clientsService.getClientDtoById(Long.parseLong(clientId)));
         model.addAttribute("orderTypes", orderTypesRepo.findAll());
         model.addAttribute("employees", employeeService.getAllSimpleEmployee());
-        return "/order/CreateOrder";
+        return "order/CreateOrder";
     }
 
     @PostMapping("/add")
@@ -59,7 +59,7 @@ public class OrdersController {
 
         RepairOrderDTO addedRepairOrder =  ordersService.addOrder(Long.parseLong(deviceId), Long.parseLong(clientId), newOrderDTO);
         attributes.addFlashAttribute("orderAdded", true);
-        return "redirect:/orders/"+addedRepairOrder.getOrderId();
+        return "redirect:orders/"+addedRepairOrder.getOrderId();
     }
 
     @GetMapping("/edit")
@@ -76,7 +76,7 @@ public class OrdersController {
         model.addAttribute("orderTypes", orderTypesRepo.findAll());
         model.addAttribute("employees", employeeService.getAllSimpleEmployee());
         model.addAttribute("statuses", statusRepo.findAll());
-        return "/order/UpdateOrder";
+        return "order/UpdateOrder";
 
     }
 
@@ -89,7 +89,7 @@ public class OrdersController {
 
         RepairOrderDTO updatedRepairOrder =  ordersService.updateOrder(updateOrderDTO);
         attributes.addFlashAttribute("orderAdded", true);
-        return "redirect:/orders/"+updatedRepairOrder.getOrderId();
+        return "redirect:orders/"+updatedRepairOrder.getOrderId();
     }
 
     @GetMapping("/find")
@@ -107,7 +107,7 @@ public class OrdersController {
         model.addAttribute("employees", employeeService.getAllSimpleEmployee());
         model.addAttribute("totalPages", allOrders.getTotalPages());
         model.addAttribute("currentPage", pageSize);
-        return "/order/searchOrder";
+        return "order/searchOrder";
     }
 
     @GetMapping("/download/{orderId}")
@@ -117,7 +117,7 @@ public class OrdersController {
         model.addAttribute("client", clientsService.getClientByDeviceId(extendedRepairOrders.getDevices().getDeviceId()));
         model.addAttribute("order", extendedRepairOrders);
 
-        return "/PdfTemplate";
+        return "PdfTemplate";
     }
 
     @GetMapping("{orderId}")
@@ -126,7 +126,7 @@ public class OrdersController {
             model.addAttribute("client", clientsService.getClientByDeviceId(extendedOrder.getDevices().getDeviceId()));
             model.addAttribute("order", extendedOrder);
 
-            return "/order/searchOrderId";
+            return "order/searchOrderId";
     }
 
     public String getOrderByClientId(@PathVariable(required = true) Long clientId){
@@ -137,7 +137,7 @@ public class OrdersController {
     public String getOrderByStatus(Model model, @RequestParam(required = false) String ordersStatus){
         var orders = ordersRepo.getRepairOrdersByStatus(ordersStatus);
         model.addAttribute("orders", orders);
-        return "/order/searchOrderByStatus";
+        return "order/searchOrderByStatus";
     }
 
 }
