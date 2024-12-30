@@ -48,7 +48,7 @@ public class EmployeesController {
         model.addAttribute("currentUsername", currentUser.getUsername());
         model.addAttribute("totalPages", pageEmployees.getTotalPages());
         model.addAttribute("currentPage", page);
-        return "employees";
+        return "employee/Employee";
     }
 
     @GetMapping("/add")
