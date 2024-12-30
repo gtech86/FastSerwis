@@ -10,7 +10,6 @@ import pl.grabowski.fastserwis.service.RepairOrdersService;
 
 @Controller
 @RequiredArgsConstructor
-@PreAuthorize("isAuthenticated()")
 @RequestMapping("/board")
 public class MainController {
 
