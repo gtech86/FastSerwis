@@ -36,7 +36,7 @@ public class ClientsController {
         if(client.isPresent()){
             model.addAttribute("client", client.get());
             model.addAttribute("devices", new ArrayList<>(client.get().getDevices()));
-            return "/client/client";
+            return "client/client";
         }
         model.addAttribute("errorMessage", "Brak klienta o podanym numerze w systemie!! :(");
         return "errorPage";
@@ -59,12 +59,12 @@ public class ClientsController {
         model.addAttribute("clients", clients);
         model.addAttribute("totalPages", pageClients.getTotalPages());
         model.addAttribute("currentPage", page);
-        return "/client/clients";
+        return "client/clients";
     }
     @GetMapping("/add")
     public String newClient(Model model){
         model.addAttribute("client", new CreateClientRequest());
-        return "/client/CreateClient";
+        return "client/CreateClient";
     }
 
     @PostMapping("/add")
@@ -73,7 +73,7 @@ public class ClientsController {
         var addedClient = clientsService.addNewClient(newClient);
         attributes.addFlashAttribute("newUser", addedClient);
         attributes.addFlashAttribute("clientAdded", true);
-        return "redirect:/clients/"+addedClient.getClientId();
+        return "redirect:clients/"+addedClient.getClientId();
     }
 
     @GetMapping("/edit/{clientId}")
@@ -84,7 +84,7 @@ public class ClientsController {
         if (client.isPresent()){
             model.addAttribute("client", client.get());
             model.addAttribute("clientId", clientId);
-            return "/client/updateClient";
+            return "client/updateClient";
         }
         model.addAttribute("errorMessage", "Brak klienta o podanym numerze w systemie!! :(");
         return "errorPage";
@@ -93,7 +93,7 @@ public class ClientsController {
     @PostMapping("/edit/{clientId}")
     public String editClient(@Valid UpdateClientRequest updateClientRequest, @PathVariable Long clientId) {
         clientsService.updateClient(clientId, updateClientRequest);
-        return "redirect:/clients/"+clientId;
+        return "redirect:clients/"+clientId;
     }
 
 
